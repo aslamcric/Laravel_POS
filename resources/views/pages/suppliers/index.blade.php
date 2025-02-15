@@ -49,13 +49,13 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="{{ url("supplier/{$supplier->id}") }}"">Show</a>
-                                            <a class=" btn btn-primary" href="{{ url("supplier/{$supplier->id}/edit") }}">Edit</a>
+                                    <a class=" btn btn-primary" href="{{ url("supplier/{$supplier->id}/edit") }}">Edit</a>
 
 
                                     <form action="{{ url("supplier/{$supplier->id}") }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Del</button>
+                                        <button class=" btn btn-danger" type="submit" class="btn btn-danger btn-sm">Del</button>
                                     </form>
                                     
                                 </td>
