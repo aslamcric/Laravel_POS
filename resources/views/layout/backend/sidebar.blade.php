@@ -181,7 +181,7 @@
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/customers.html"><i data-feather="user"></i><span>Customers</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/suppliers.html"><i data-feather="users"></i><span>Suppliers</span></a>
+                            <a href="{{ url('supplier') }}"><i data-feather="users"></i><span>Suppliers</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/store-list.html"><i data-feather="home"></i><span>Stores</span></a>

@@ -30,10 +30,10 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Photo</th>
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Address</th>
-                                <th>Photo</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -41,12 +41,12 @@
                             @forelse ($suppliers as $supplier)
                             <tr>
                                 <td>{{ $supplier->name }}</td>
-                                <td>{{ $supplier->phone }}</td>
-                                <td>{{ $supplier->email }}</td>
-                                <td>{{ $supplier->address }}</td>
                                 <td>
                                     <img width="50" height="50" src="{{ asset('photo') }}/{{ $supplier->photo }}" alt="{{ $supplier->name }}">
                                 </td>
+                                <td>{{ $supplier->phone }}</td>
+                                <td>{{ $supplier->email }}</td>
+                                <td>{{ $supplier->address }}</td>
                                 <td>
                                     <a class="btn btn-info" href="{{ url("supplier/{$supplier->id}") }}"">Show</a>
                                     <a class=" btn btn-primary" href="{{ url("supplier/{$supplier->id}/edit") }}">Edit</a>
@@ -57,7 +57,7 @@
                                         @method('DELETE')
                                         <button class=" btn btn-danger" type="submit" class="btn btn-danger btn-sm">Del</button>
                                     </form>
-                                    
+
                                 </td>
                             </tr>
                             @empty
