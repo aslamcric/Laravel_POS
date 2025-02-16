@@ -5,7 +5,6 @@
             href="{{url('/dashboard')}}"
             class="logo logo-normal">
             <img
-                {{-- src="https://dreamspos.dreamstechnologies.com/html/template/assets/img/logo.png" --}}
                 src="{{asset('assets')}}/img/logo.png"
                 alt="" />
         </a>
