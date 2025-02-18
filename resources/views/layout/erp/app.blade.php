@@ -50,23 +50,23 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <!-- Header -->
-        @include('layout.backend.header')
+        @include('layout.erp.header')
         <!-- /Header -->
 
         <!-- Sidebar -->
-        @include('layout.backend.sidebar')
+        @include('layout.erp.sidebar')
         <!-- /Sidebar -->
-        @include('layout.backend.sidebar2')
+        @include('layout.erp.sidebar2')
         <!-- Sidebar -->
         <!-- /Sidebar -->
 
         <!-- Sidebar -->
-        @include('layout.backend.horizontal_sidebar')
+        @include('layout.erp.horizontal_sidebar')
         <!-- /Sidebar -->
 
         <div class="page-wrapper">
             <div class="content">
-                @yield('page_content')
+                @yield('page')
             </div>
         </div>
 

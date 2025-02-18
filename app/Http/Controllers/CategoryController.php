@@ -12,13 +12,13 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(3); // Pagination
-        return view('pages.categories.index', compact('categories'));
+        return view('pages.erp.categories.index', compact('categories'));
     }
 
     // Show form to create a new category
     public function create()
     {
-        return view('pages.categories.create');
+        return view('pages.erp.categories.create');
     }
 
     // Store a new category
@@ -44,14 +44,14 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-        return view('pages.categories.show', compact('category'));
+        return view('pages.erp.categories.show', compact('category'));
     }
 
     // Show form to edit category details
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('pages.categories.update', compact('category'));
+        return view('pages.erp.categories.update', compact('category'));
     }
 
     // Update category details
@@ -96,9 +96,9 @@ class CategoryController extends Controller
 
         $requestdata= $request->name;
 
-        return view('pages.categories.index' , compact('categories','requestdata'));
+        return view('pages.erp.categories.index' , compact('categories','requestdata'));
         if($students){
-            return view('pages.categories.index' , compact('categories'));
+            return view('pages.erp.categories.index' , compact('categories'));
          }else{
             $categories=[];
          }

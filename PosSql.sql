@@ -1,5 +1,5 @@
-CREATE DATABASE inventory_pos;
-USE inventory_pos;
+CREATE DATABASE laravel_pos;
+USE laravel_pos;
 
 -- -------------------------------
 -- All Tables Name is here

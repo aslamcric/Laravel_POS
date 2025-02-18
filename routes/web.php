@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,6 @@ Route::resource('supplier', SupplierController::class);
 
 Route::post('category/search', [CategoryController::class,'search']);
 Route::resource('category', CategoryController::class);
+
+
+Route::resource('manufacturers', ManufacturerController::class);

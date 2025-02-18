@@ -11,13 +11,13 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::paginate(3); // Pagination
-        return view('pages.suppliers.index', compact('suppliers'));
+        return view('pages.erp.suppliers.index', compact('suppliers'));
     }
 
     // Show form to create a new supplier
     public function create()
     {
-        return view('pages.suppliers.create');
+        return view('pages.erp.suppliers.create');
     }
 
     // Store a new supplier
@@ -64,14 +64,14 @@ class SupplierController extends Controller
     public function show($id)
     {
         $supplier = Supplier::find($id);
-        return view('pages.suppliers.show', compact('supplier'));
+        return view('pages.erp.suppliers.show', compact('supplier'));
     }
 
     // Show form to edit supplier details
     public function edit($id)
     {
         $supplier = Supplier::find($id);
-        return view('pages.suppliers.update', compact('supplier'));
+        return view('pages.erp.suppliers.update', compact('supplier'));
     }
 
     // Update supplier details

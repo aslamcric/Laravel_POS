@@ -1,6 +1,6 @@
-@extends('layout.backend.main')
+@extends('layout.erp.app')
 
-@section('page_content')
+@section('page')
 <div class="row">
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-widget w-100">
