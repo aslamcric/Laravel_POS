@@ -23,8 +23,6 @@
 			<th>Phone</th>
 			<th>Email</th>
 			<th>Address</th>
-			<th>Created At</th>
-			<th>Updated At</th>
 
 			<th>Action</th>
 		</tr>
@@ -37,8 +35,6 @@
 			<td>{{$manufacturer->phone}}</td>
 			<td>{{$manufacturer->email}}</td>
 			<td>{{$manufacturer->address}}</td>
-			<td>{{$manufacturer->created_at}}</td>
-			<td>{{$manufacturer->updated_at}}</td>
 
 			<td>
 			<form action = "{{route('manufacturers.destroy',$manufacturer->id)}}" method = "post">
