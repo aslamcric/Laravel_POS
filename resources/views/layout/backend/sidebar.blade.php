@@ -77,7 +77,7 @@
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/low-stocks.html"><i data-feather="trending-down"></i><span>Low Stocks</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/category-list.html"><i data-feather="codepen"></i><span>Category</span></a>
+                            <a href="{{ url('category/') }}"><i data-feather="codepen"></i><span>Category</span></a>
                         </li>
                         {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/sub-categories.html"><i data-feather="speaker"></i><span>Sub Category</span></a>

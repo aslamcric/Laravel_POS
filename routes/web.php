@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,6 @@ require __DIR__.'/auth.php';
 
 Route::post('supplier/search', [SupplierController::class,'search']);
 Route::resource('supplier', SupplierController::class);
+
+Route::post('category/search', [CategoryController::class,'search']);
+Route::resource('category', CategoryController::class);
