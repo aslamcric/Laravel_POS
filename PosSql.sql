@@ -69,7 +69,7 @@ CREATE TABLE manufacturers (
 );
 
 -- UOM (Unit of Measurement) Table
-CREATE TABLE uom (
+CREATE TABLE uoms (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -188,7 +188,7 @@ CREATE TABLE purchases (
     description VARCHAR(150),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)
+);
 
 -- Purchases Details Table
 CREATE TABLE purchases_details (
@@ -203,7 +203,7 @@ CREATE TABLE purchases_details (
 );
 
 -- Stock Table
-CREATE TABLE stock (
+CREATE TABLE stocks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     transaction_type_id INT DEFAULT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE stock_adjustment (
     warehouse_id INT DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)
+);
 -- Stock Adjustment Details Table
 CREATE TABLE stock_adjustment_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -243,3 +243,6 @@ CREATE TABLE stock_adjustment_details (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+
+-- probot create-laravel-mvc -t customers -d laravel_pos

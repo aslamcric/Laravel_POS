@@ -3,10 +3,19 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PurchasesDetailController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatuController;
+use App\Http\Controllers\StockAdjustmentController;
+use App\Http\Controllers\StockAdjustmentDetailController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\UomController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +55,21 @@ Route::resource('status', StatuController::class);
 Route::resource('uoms', UomController::class);
 
 Route::resource('warehouses', WarehouseController::class);
+
+Route::resource('orders', OrderController::class);
+
+Route::resource('orderdetails', OrderDetailController::class);
+
+Route::resource('products', ProductController::class);
+
+Route::resource('purchases', PurchaseController::class);
+
+Route::resource('purchasesdetails', PurchasesDetailController::class);
+
+Route::resource('stocks', StockController::class);
+
+Route::resource('stockadjustments', StockAdjustmentController::class);
+
+Route::resource('stockadjustmentdetails', StockAdjustmentDetailController::class);
+
+Route::resource('transactiontypes', TransactionTypeController::class);
