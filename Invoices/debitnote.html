@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debit Note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+        .invoice-box {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
+        .table th {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .table td {
+            border-color: #dee2e6;
+        }
+        .header-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #007bff;
+            text-transform: uppercase;
+        }
+        .debit-note-btn {
+            background: #007bff;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            transition: 0.3s;
+        }
+        .debit-note-btn:hover {
+            background: #0056b3;
+        }
+        .print-btn {
+            background: #28a745;
+            color: white;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: none;
+            transition: 0.3s;
+        }
+        .print-btn:hover {
+            background: #218838;
+        }
+        textarea {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            height: 100px;  /* Ensure proper height */
+            resize: vertical;  /* Allow vertical resizing */
+            font-size: 14px;  /* Improve text readability */
+        }
+        .table td button {
+            background: #dc3545;
+            color: white;
+            font-size: 14px;
+            border-radius: 6px;
+            border: none;
+            padding: 5px 10px;
+            transition: 0.3s;
+        }
+        .table td button:hover {
+            background: #c82333;
+        }
+        .table td button.add-btn {
+            background: #007bff;
+        }
+        .table td button.add-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="invoice-box">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Debit Note No:</strong> <span class="text-primary">37</span></p>
+            </div>
+            <div class="col-md-6 text-end">
+                <p><strong>Date:</strong> 18 August 2017</p>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h2 class="header-text">Imran Brothers</h2>
+            <p class="text-muted">Matitola, Bangladesh</p>
+            <button class="debit-note-btn">Debit Note</button>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h5><strong>Supplier:</strong> <span class="text-primary">Messrs Samrat Stores Traders</span></h5>
+                <p><strong>Address:</strong> 37, Raisahela, Mirpur-6, Dhaka</p>
+                <p><strong>Reference No:</strong> Invoice No. 1254</p>
+            </div>
+            <div class="col-md-6 text-end">
+                <p><strong>And Date:</strong> 18 August 2017</p>
+            </div>
+        </div>
+
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Sl. No</th>
+                    <th>Description of Goods & Reason for Return</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Total Amount (Taka)</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><textarea rows="3" placeholder="Enter reason for return..."></textarea></td>
+                    <td>5</td>
+                    <td>1000</td>
+                    <td>5000</td>
+                    <td><button class="add-btn">Add</button></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td><textarea rows="3" placeholder="Enter reason for return..."></textarea></td>
+                    <td>5</td>
+                    <td>1000</td>
+                    <td>5000</td>
+                    <td><button>Remove</button></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end"></td>
+                    <td>Less: Discount</td>
+                    <td>1,000</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4" class="text-end">Total Amount (Taka)</th>
+                    <th>11,000</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <p><strong>Amount (in words):</strong> <span class="text-primary">Twelve Thousand Only</span></p>
+            </div>
+            <div class="col-md-6 text-end">
+                <p><strong>Manager:</strong> Business Executive</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="print-btn" onclick="window.print()">Print</button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

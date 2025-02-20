@@ -123,8 +123,8 @@
                     <h6 class="submenu-hdr">Sales</h6>
                     <ul>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/sales-list.html"><i
-                                    data-feather="shopping-cart"></i><span>Sales</span></a>
+                            <a href="{{ url('orders') }}"><i
+                                    data-feather="shopping-cart"></i><span>Order</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/invoice-report.html"><i

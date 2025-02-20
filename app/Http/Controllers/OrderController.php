@@ -10,6 +10,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Product;
+use App\Models\Statu;
 use App\Models\Status;
 
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class OrderController extends Controller{
 		return view("pages.erp.order.index",["orders"=>$orders]);
 	}
 	public function create(){
-		return view("pages.erp.order.create",["customers"=>Customer::all(),"status"=>Status::all()]);
+		return view("pages.erp.order.create",["customers"=>Customer::all(),"status"=>Statu::all(), "products" => Product::all()]);
 	}
 	public function store(Request $request){
 		//Order::create($request->all());
@@ -78,6 +80,18 @@ date_default_timezone_set("Asia/Dhaka");
 	public function destroy(Order $order){
 		$order->delete();
 		return redirect()->route("orders.index")->with('success', 'Deleted Successfully.');
+	}
+
+
+
+    public function find_customer(Request $request){
+		$customer = Customer::find($request->id);
+		return response()->json(['customer'=> $customer]);
+	}
+
+    public function find_product(Request $request){
+		$product = Product::find($request->id);
+		return response()->json(['product'=> $product]);
 	}
 }
 ?>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Invoice</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    .sales-box {
+      padding: 25px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+    }
+    .sales-box:hover {
+      transform: scale(1.02);
+    }
+    .table th {
+      background-color: #42a5f5;
+      color: white;
+    }
+    .total-summary {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="sales-box">
+      <h2 class="text-center mb-4">Sales Invoice 🧾</h2>
+      <div class="d-flex justify-content-between mb-4">
+        <div>
+          <strong>Customer Information:</strong><br>
+          Name: John Doe<br>
+          Contact: (987) 654-3210<br>
+        </div>
+        <div class="text-end">
+          <strong>Invoice Details:</strong><br>
+          Invoice #: SAL-1001<br>
+          Date: 14 Feb 2025<br>
+          
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Sl</th>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+
+          <tr>
+            <td>1</td>
+            <td>Product X</td>
+            <td>2</td>
+            <td>$50.00</td>
+            <td>$100.00</td>
+            <td><button class="btn btn-success">✅ Add</button></td>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr>
+            <td>2</td>
+            <td>Product Y</td>
+            <td>1</td>
+            <td>$150.00</td>
+            <td>$150.00</td>
+            <td><button class="btn btn-danger">❌ Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-end">
+        <p class="total-summary">Subtotal: $250.00</p>
+        <p class="total-summary">Tax (5%): $12.50</p>
+        <p class="total-summary">Grand Total: $262.50</p>
+        <p><strong>Payment Status:</strong> Paid ✅</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

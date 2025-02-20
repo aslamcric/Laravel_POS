@@ -4,6 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    {{--
+     https://stackoverflow.com/questions/32738763/laravel-csrf-token-mismatch-for-ajax-post-request
+
+     --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <meta name="description" content="Garments Manufacturing ERP SOFTWARE" />
     <meta name="keywords"
         content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects" />
@@ -39,8 +45,12 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css" />
 
     <!-- font awesome -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     @yield('css')
+
+    <script
+    src="{{asset('assets')}}/js/jquery-3.7.1.min.js"></script>
+
 </head>
 
 <body>
@@ -84,9 +94,7 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script
-			src="{{asset('assets')}}/js/jquery-3.7.1.min.js"
-			type="6bc737fdedebc88b41732761-text/javascript"></script>
+
 
     <!-- Feather Icon JS -->
     <script
