@@ -58,6 +58,8 @@
                                         <th>Subtotal</th>
                                         <th><button class="btn btn-danger clearAll">Clear All</button></th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <th>
                                             <select class="form-control" name="product_id" id="product_id">
@@ -77,11 +79,8 @@
                                         <th><input type="number" class="form-control p_qty"></th>
                                         <th><input type="text" class="form-control p_discount"></th>
                                         <th><input type="number" class="form-control p_subtotal"></th>
-                                        <th><button class="btn btn-success add_cart_btn">Add</button></th>
+                                        <th><button class="btn btn-primary add_cart_btn">Add</button></th>
                                     </tr>
-                                </thead>
-                                <tbody class="dataAppend">
-
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -137,9 +136,7 @@
                     $.ajax({
                         url: "{{ route('find_customer') }}",
                         type: 'POST',
-                        data: {
-                            id: customer_id
-                        },
+                        data: { id: customer_id },
                         success: function(res) {
                             $(".address").text(res.customer?.address || 'N/A');
                             $(".email").text(res.customer?.email || 'N/A');
@@ -158,9 +155,7 @@
                     $.ajax({
                         url: "{{ url('find_product') }}",
                         type: 'POST',
-                        data: {
-                            id: product_id
-                        },
+                        data: { id: product_id },
                         success: function(res) {
                             if (res.product) {
                                 $(".p_description").val(res.product.description);
@@ -205,7 +200,7 @@
                 let qty = parseFloat($(".p_qty").val()) || 0;
                 let discount = parseFloat($(".p_discount").val()) || 0;
 
-                let total_discount = discount;
+                let total_discount = discount * qty;
                 let subtotal = price * qty - total_discount;
 
                 let item = {
@@ -226,8 +221,6 @@
             function printCart() {
                 let cartdata = cart.getCart();
                 if (cartdata) {
-
-
                     let htmldata = "";
                     let subtotal = 0;
                     let discount = 0;
@@ -239,13 +232,13 @@
 
                         htmldata += `
                             <tr>
+                                <td><button data="${element.item_id}" class='btn btn-danger remove'>-</button></td>
                                 <td><p class="fs-14">${element.name}</p></td>
                                 <td><p class="fs-14 text-gray">${element.name}</p></td>
                                 <td><span class="fs-14 text-gray">$${element.price}</span></td>
                                 <td><p class="fs-14 text-gray">${element.qty}</p></td>
                                 <td><span class="fs-14 text-gray">$${element.total_discount}</span></td>
                                 <td><span class="fs-14 text-gray">$${element.subtotal}</span></td>
-                                <td><button data="${element.item_id}" class='btn btn-danger remove'>Remove</button></td>
                             </tr>
                         `;
                     });
@@ -255,7 +248,9 @@
                     $('.tax').html((subtotal * 5 / 100).toFixed(2));
                     $('.Discount').html(discount.toFixed(2));
                     $('.grandtotal').html((subtotal + (subtotal * 5 / 100)).toFixed(2));
-                    // cartIconIncrease()
+                } else {
+                    $('.dataAppend').html("");
+                    $('.subtotal, .tax, .Discount, .grandtotal').html("0.00");
                 }
             }
 
