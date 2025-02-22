@@ -76,7 +76,7 @@
                                         <th><input type="text" disabled class="form-control p_price"></th>
                                         <th><input type="number" class="form-control p_qty"></th>
                                         <th><input type="text" class="form-control p_discount"></th>
-                                        <th><input type="number" class="form-control p_subtotal"></th>
+                                        <th><input type="text" class="form-control p_subtotal"></th>
                                         <th><button class="btn btn-success add_cart_btn">Add</button></th>
                                     </tr>
                                 </thead>
@@ -92,10 +92,10 @@
                                         <td colspan="5" class="text-end">Tax (5%)</td>
                                         <td class="tax">$0.00</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="5" class="text-end">Discount</td>
                                         <td class="Discount">$0.00</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <td colspan="5" class="text-end fw-bold">Total</td>
                                         <td class="grandtotal fw-bold">$0.00</td>
