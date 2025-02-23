@@ -50,7 +50,7 @@
                             <table class="table table-bordered">
                                 <thead class="table-light text-white bg-primary">
                                     <tr>
-                                        <th>Product/Service</th>
+                                        <th>Product</th>
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Qty</th>
@@ -92,10 +92,10 @@
                                         <td colspan="5" class="text-end">Tax (5%)</td>
                                         <td class="tax">$0.00</td>
                                     </tr>
-                                    {{-- <tr>
+                                    <tr>
                                         <td colspan="5" class="text-end">Discount</td>
                                         <td class="Discount">$0.00</td>
-                                    </tr> --}}
+                                    </tr>
                                     <tr>
                                         <td colspan="5" class="text-end fw-bold">Total</td>
                                         <td class="grandtotal fw-bold">$0.00</td>
@@ -106,7 +106,7 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <button class="btn btn-success me-2" onclick="processInvoice()">Process</button>
+                            <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a>
                         </div>
                     </div>
                 </div>
@@ -271,6 +271,49 @@
                 cart.clearCart();
                 printCart();
             });
+
+            $('.btn_process').on('click', function() {
+                // alert('ok');
+
+                let customer_id = $('#customer_id').val();
+                let order_total = $('.grandtotal').text();
+                let paid_amount = $('.grandtotal').text();
+                let discount = $('.Discount').text();
+                let vat = $('.tax').text();
+                let products = cart.getCart()
+
+
+                // let dataItem = {
+                //     customer_id: customer_id,
+                //     order_total: order_total,
+                //     paid_amount: paid_amount,
+                //     discount: discount,
+                //     vat: vat,
+                //     product: product,
+                // }
+
+                // console.log(dataItem);
+
+
+                $.ajax({
+                    url: "{{ url('api/orders') }}",
+                    type: 'Post',
+                    data: {
+                        customer_id: customer_id,
+                        order_total: order_total,
+                        paid_amount: paid_amount,
+                        discount: discount,
+                        vat: vat,
+                        products: products,
+                    },
+                    success: function(res) {
+                        console.log(res);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            })
         });
     </script>
 

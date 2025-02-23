@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return response()->json(['orders'=>$orders]);
+        return response()->json(['orders' => $orders]);
     }
 
     /**
@@ -30,7 +32,62 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $order = new Order();
+        $order->customer_id = $request->customer_id;
+        $order->order_total = $request->order_total;
+        $order->discount = $request->discount;
+        $order->shipping_address = "";   //$request->shipping_address;
+        $order->paid_amount = $request->paid_amount;
+        $order->status_id = 1;
+        $order->order_date = now();
+        $order->delivery_date = date('Y-m-d H:i:s', strtotime('+7 days'));
+        $order->vat = $request->vat;
+        $order->remark = "";   //$request->remark;
+        date_default_timezone_set("Asia/Dhaka");
+        $order->created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Dhaka");
+        $order->updated_at = date('Y-m-d H:i:s');
+
+        $order->save();
+        $lastInsertedId = $order->id;
+
+        $productsdata = $request->products;
+
+        //    print_r( $productsdata);
+
+        foreach ($productsdata as $key => $product) {
+            $orderdetail = new OrderDetail();
+
+            $orderdetail->order_id = $lastInsertedId;
+            $orderdetail->product_id = $product['item_id'];
+            $orderdetail->qty = $product['qty'];
+            $orderdetail->price = $product['price'];
+            $orderdetail->vat = $product['vat'];
+            $orderdetail->uom_id = "";
+            $orderdetail->discount = $product['total_discount'];
+            date_default_timezone_set("Asia/Dhaka");
+            $orderdetail->created_at = date('Y-m-d H:i:s');
+            date_default_timezone_set("Asia/Dhaka");
+            $orderdetail->updated_at = date('Y-m-d H:i:s');
+
+            $orderdetail->save();
+
+
+
+            $stock = new Stock;
+            $stock->product_id=$product['item_id'];
+            $stock->transaction_type_id= 2;
+            $stock->warehouse_id=1;
+            $stock->qty=$product['qty'] * (-1);
+            $stock->uom_id=1;
+            $stock->remark="Sales";
+            $stock->created_at=date('Y-m-d H:i:s');
+            $stock->updated_at=date('Y-m-d H:i:s');
+
+            $stock->save();
+        }
+        return response()->json(['success' => "success"]);
     }
 
     /**

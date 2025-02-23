@@ -61,12 +61,11 @@
                     <h6 class="submenu-hdr">Inventory</h6>
                     <ul>
                         <li>
-                            <a href="{{ url('products') }}"><i
-                                    data-feather="box"></i><span>Products</span></a>
+                            <a href="{{ url('products') }}"><i data-feather="box"></i><span>Products</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('products/create') }}"><i
-                                    data-feather="plus-square"></i><span>Create Product</span></a>
+                            <a href="{{ url('products/create') }}"><i data-feather="plus-square"></i><span>Create
+                                    Product</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/expired-products.html"><i
@@ -106,12 +105,11 @@
                     <h6 class="submenu-hdr">Stock</h6>
                     <ul>
                         <li>
-                            <a href="{{ url('stocks') }}"><i
-                                    data-feather="package"></i><span>Manage Stock</span></a>
+                            <a href="{{ url('stocks') }}"><i data-feather="package"></i><span>Manage Stock</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('stockadjustments') }}"><i
-                                    data-feather="clipboard"></i><span>Stock Adjustment</span></a>
+                            <a href="{{ url('stockadjustments') }}"><i data-feather="clipboard"></i><span>Stock
+                                    Adjustment</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/stock-transfer.html"><i
@@ -120,15 +118,13 @@
                     </ul>
                 </li>
                 <li class="submenu-open">
-                    <h6 class="submenu-hdr">Sales</h6>
+                    <h6 class="submenu-hdr">Orders</h6>
                     <ul>
                         <li>
-                            <a href="{{ url('orders') }}"><i
-                                    data-feather="shopping-cart"></i><span>Order</span></a>
+                            <a href="{{ url('orders') }}"><i data-feather="shopping-cart"></i><span>Order</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/invoice-report.html"><i
-                                    data-feather="file-text"></i><span>Invoices</span></a>
+                            <a href="{{ url('orderdetails') }}"><i data-feather="file-text"></i><span>Order Details</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/sales-returns.html"><i
@@ -158,8 +154,8 @@
                                     data-feather="shopping-bag"></i><span>Purchases</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('orders') }}"><i
-                                    data-feather="file-minus"></i><span>Purchase Order</span></a>
+                            <a href="{{ url('orders') }}"><i data-feather="file-minus"></i><span>Purchase
+                                    Order</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/purchase-returns.html"><i
@@ -197,8 +193,7 @@
                                     data-feather="home"></i><span>Stores</span></a>
                         </li>
                         <li>
-                            <a href="{{url('warehouses')}}"><i
-                                    data-feather="archive"></i><span>Warehouses</span></a>
+                            <a href="{{ url('warehouses') }}"><i data-feather="archive"></i><span>Warehouses</span></a>
                         </li>
                     </ul>
                 </li>
@@ -327,8 +322,8 @@
                                     data-feather="user-check"></i><span>Users</span></a>
                         </li>
                         <li>
-                            <a href="{{url('roles')}}"><i
-                                    data-feather="shield"></i><span>Roles & Permissions</span></a>
+                            <a href="{{ url('roles') }}"><i data-feather="shield"></i><span>Roles &
+                                    Permissions</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/delete-account.html"><i

@@ -6,7 +6,9 @@
 * Date: 2/19/2025 11:58:37 AM
 * Contact: towhid1@outlook.com
 */
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Stock;
 use App\Models\Product;
@@ -18,60 +20,68 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
-class StockController extends Controller{
-	public function index(){
-		$stocks = Stock::paginate(10);
-		return view("pages.erp.stock.index",["stocks"=>$stocks]);
-	}
-	public function create(){
-		return view("pages.erp.stock.create",["products"=>Product::all(),"transaction_types"=>Transaction_Type::all(),"warehouses"=>Warehouse::all(),"uom"=>Uom::all()]);
-	}
-	public function store(Request $request){
-		//Stock::create($request->all());
-		$stock = new Stock;
-		$stock->product_id=$request->product_id;
-		$stock->transaction_type_id=$request->transaction_type_id;
-		$stock->warehouse_id=$request->warehouse_id;
-		$stock->qty=$request->qty;
-		$stock->uom_id=$request->uom_id;
-		$stock->remark=$request->remark;
-date_default_timezone_set("Asia/Dhaka");
-		$stock->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$stock->updated_at=date('Y-m-d H:i:s');
 
-		$stock->save();
+class StockController extends Controller
+{
+    public function index()
+    {
+        $stocks = Stock::paginate(10);
+        return view("pages.erp.stock.index", ["stocks" => $stocks]);
+    }
+    public function create()
+    {
+        return view("pages.erp.stock.create", ["products" => Product::all(), "transaction_types" => Transaction_Type::all(), "warehouses" => Warehouse::all(), "uom" => Uom::all()]);
+    }
+    public function store(Request $request)
+    {
+        //Stock::create($request->all());
+        $stock = new Stock;
+        $stock->product_id = $request->product_id;
+        $stock->transaction_type_id = $request->transaction_type_id;
+        $stock->warehouse_id = $request->warehouse_id;
+        $stock->qty = $request->qty;
+        $stock->uom_id = $request->uom_id;
+        $stock->remark = $request->remark;
+        date_default_timezone_set("Asia/Dhaka");
+        $stock->created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Dhaka");
+        $stock->updated_at = date('Y-m-d H:i:s');
 
-		return back()->with('success', 'Created Successfully.');
-	}
-	public function show($id){
-		$stock = Stock::find($id);
-		return view("pages.erp.stock.show",["stock"=>$stock]);
-	}
-	public function edit(Stock $stock){
-		return view("pages.erp.stock.edit",["stock"=>$stock,"products"=>Product::all(),"transaction_types"=>Transaction_Type::all(),"warehouses"=>Warehouse::all(),"uom"=>Uom::all()]);
-	}
-	public function update(Request $request,Stock $stock){
-		//Stock::update($request->all());
-		$stock = Stock::find($stock->id);
-		$stock->product_id=$request->product_id;
-		$stock->transaction_type_id=$request->transaction_type_id;
-		$stock->warehouse_id=$request->warehouse_id;
-		$stock->qty=$request->qty;
-		$stock->uom_id=$request->uom_id;
-		$stock->remark=$request->remark;
-date_default_timezone_set("Asia/Dhaka");
-		$stock->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$stock->updated_at=date('Y-m-d H:i:s');
+        $stock->save();
 
-		$stock->save();
+        return back()->with('success', 'Created Successfully.');
+    }
+    public function show($id)
+    {
+        $stock = Stock::find($id);
+        return view("pages.erp.stock.show", ["stock" => $stock]);
+    }
+    public function edit(Stock $stock)
+    {
+        return view("pages.erp.stock.edit", ["stock" => $stock, "products" => Product::all(), "transaction_types" => Transaction_Type::all(), "warehouses" => Warehouse::all(), "uom" => Uom::all()]);
+    }
+    public function update(Request $request, Stock $stock)
+    {
+        //Stock::update($request->all());
+        $stock = Stock::find($stock->id);
+        $stock->product_id = $request->product_id;
+        $stock->transaction_type_id = $request->transaction_type_id;
+        $stock->warehouse_id = $request->warehouse_id;
+        $stock->qty = $request->qty;
+        $stock->uom_id = $request->uom_id;
+        $stock->remark = $request->remark;
+        date_default_timezone_set("Asia/Dhaka");
+        $stock->created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Dhaka");
+        $stock->updated_at = date('Y-m-d H:i:s');
 
-		return redirect()->route("stocks.index")->with('success','Updated Successfully.');
-	}
-	public function destroy(Stock $stock){
-		$stock->delete();
-		return redirect()->route("stocks.index")->with('success', 'Deleted Successfully.');
-	}
+        $stock->save();
+
+        return redirect()->route("stocks.index")->with('success', 'Updated Successfully.');
+    }
+    public function destroy(Stock $stock)
+    {
+        $stock->delete();
+        return redirect()->route("stocks.index")->with('success', 'Deleted Successfully.');
+    }
 }
-?>
