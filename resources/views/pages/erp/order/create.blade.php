@@ -106,7 +106,8 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a>
+                            <a class="btn btn-success me-2 btn_process">Process</a>
+                            {{-- <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a> --}}
                         </div>
                     </div>
                 </div>
@@ -204,6 +205,7 @@
                 let price = parseFloat($(".p_price").val()) || 0;
                 let qty = parseFloat($(".p_qty").val()) || 0;
                 let discount = parseFloat($(".p_discount").val()) || 0;
+                let description = $(".p_description").val() || ""; // Ensure description is defined
 
                 let total_discount = discount;
                 let subtotal = price * qty - total_discount;
@@ -211,6 +213,7 @@
                 let item = {
                     "name": name,
                     "item_id": item_id,
+                    "description": description,
                     "price": price,
                     "qty": qty,
                     "discount": discount,
@@ -220,14 +223,19 @@
 
                 cart.save(item);
                 printCart();
+
+                // Clear input fields after adding to cart
+                $("#product_id").val("");
+                $(".p_price").val("");
+                $(".p_qty").val("");
+                $(".p_discount").val("");
+                $(".p_description").val("");
             });
 
             // Update cart display
             function printCart() {
                 let cartdata = cart.getCart();
                 if (cartdata) {
-
-
                     let htmldata = "";
                     let subtotal = 0;
                     let discount = 0;
@@ -240,7 +248,7 @@
                         htmldata += `
                             <tr>
                                 <td><p class="fs-14">${element.name}</p></td>
-                                <td><p class="fs-14 text-gray">${element.name}</p></td>
+                                <td><p class="fs-14 text-gray">${element.description}</p></td>
                                 <td><span class="fs-14 text-gray">$${element.price}</span></td>
                                 <td><p class="fs-14 text-gray">${element.qty}</p></td>
                                 <td><span class="fs-14 text-gray">$${element.total_discount}</span></td>
@@ -255,7 +263,6 @@
                     $('.tax').html((subtotal * 5 / 100).toFixed(2));
                     $('.Discount').html(discount.toFixed(2));
                     $('.grandtotal').html((subtotal + (subtotal * 5 / 100)).toFixed(2));
-                    // cartIconIncrease()
                 }
             }
 
@@ -272,29 +279,16 @@
                 printCart();
             });
 
+            // Process order
             $('.btn_process').on('click', function() {
-                // alert('ok');
-
                 let customer_id = $('#customer_id').val();
                 let order_total = $('.grandtotal').text();
                 let paid_amount = $('.grandtotal').text();
                 let discount = $('.Discount').text();
                 let vat = $('.tax').text();
-                let products = cart.getCart()
+                let products = cart.getCart();
 
-
-                // let dataItem = {
-                //     customer_id: customer_id,
-                //     order_total: order_total,
-                //     paid_amount: paid_amount,
-                //     discount: discount,
-                //     vat: vat,
-                //     product: product,
-                // }
-
-                // console.log(dataItem);
-
-
+                // Send the order data via AJAX
                 $.ajax({
                     url: "{{ url('api/orders') }}",
                     type: 'Post',
@@ -308,14 +302,20 @@
                     },
                     success: function(res) {
                         console.log(res);
+
+                        // Clear the cart after successful order processing
+                        cart.clearCart();
+                        printCart();
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
                     }
                 });
-            })
+            });
+
         });
     </script>
 
     <script src="{{ asset('assets/js/cart.js') }}"></script>
 @endsection
+

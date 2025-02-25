@@ -32,8 +32,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // print_r($request->all());
 
-        $order = new Order();
+        $order = new Order;
         $order->customer_id = $request->customer_id;
         $order->order_total = $request->order_total;
         $order->discount = $request->discount;
@@ -50,21 +51,25 @@ class OrderController extends Controller
         $order->updated_at = date('Y-m-d H:i:s');
 
         $order->save();
-        $lastInsertedId = $order->id;
 
+        $lastInsertedId = $order->id;
         $productsdata = $request->products;
 
         //    print_r( $productsdata);
 
         foreach ($productsdata as $key => $product) {
-            $orderdetail = new OrderDetail();
+            $orderdetail = new OrderDetail;
+            print_r($product);
+
+
 
             $orderdetail->order_id = $lastInsertedId;
             $orderdetail->product_id = $product['item_id'];
             $orderdetail->qty = $product['qty'];
             $orderdetail->price = $product['price'];
-            $orderdetail->vat = $product['vat'];
-            $orderdetail->uom_id = "";
+            $orderdetail->vat = $request->vat;
+
+            $orderdetail->uom_id = 1;
             $orderdetail->discount = $product['total_discount'];
             date_default_timezone_set("Asia/Dhaka");
             $orderdetail->created_at = date('Y-m-d H:i:s');
@@ -75,17 +80,17 @@ class OrderController extends Controller
 
 
 
-            $stock = new Stock;
-            $stock->product_id=$product['item_id'];
-            $stock->transaction_type_id= 2;
-            $stock->warehouse_id=1;
-            $stock->qty=$product['qty'] * (-1);
-            $stock->uom_id=1;
-            $stock->remark="Sales";
-            $stock->created_at=date('Y-m-d H:i:s');
-            $stock->updated_at=date('Y-m-d H:i:s');
+            // $stock = new Stock;
+            // $stock->product_id=$product['item_id'];
+            // $stock->transaction_type_id= 2;
+            // $stock->warehouse_id=1;
+            // $stock->qty=$product['qty'] * (-1);
+            // $stock->uom_id=1;
+            // $stock->remark="Sales";
+            // $stock->created_at=date('Y-m-d H:i:s');
+            // $stock->updated_at=date('Y-m-d H:i:s');
 
-            $stock->save();
+            // $stock->save();
         }
         return response()->json(['success' => "success"]);
     }
