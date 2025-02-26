@@ -40,10 +40,11 @@
             @foreach ($orders as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->customer_id }}</td>
+                    {{-- <td>{{ $order->customer_id }}</td> --}}
+                    <td>{{ $order->customers->name }}</td>
                     <td>{{ $order->order_total }}</td>
                     <td>{{ $order->discount }}</td>
-                    <td>{{ $order->shipping_address }}</td>
+                    <td>{{ optional($order->customers)->address }}</td>
                     <td>{{ $order->paid_amount }}</td>
                     <td>{{ $order->status_id }}</td>
                     <td>{{ $order->order_date }}</td>

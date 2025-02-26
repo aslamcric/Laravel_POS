@@ -20,11 +20,11 @@
 		<tr>
 			<th>Id</th>
 			<th>Product Id</th>
-			<th>Transaction Type Id</th>
-			<th>Warehouse Id</th>
+			{{-- <th>Transaction Type Id</th>
+			<th>Warehouse Id</th> --}}
 			<th>Qty</th>
-			<th>Uom Id</th>
-			<th>Remark</th>
+			{{-- <th>Uom Id</th>
+			<th>Remark</th> --}}
 
 			<th>Action</th>
 		</tr>
@@ -33,12 +33,12 @@
 	@foreach($stocks as $stock)
 		<tr>
 			<td>{{$stock->id}}</td>
-			<td>{{$stock->product_id}}</td>
-			<td>{{$stock->transaction_type_id}}</td>
-			<td>{{$stock->warehouse_id}}</td>
+			<td>{{$stock->name}}</td>
+			{{-- <td>{{$stock->transaction_type_id}}</td>
+			<td>{{$stock->warehouse_id}}</td> --}}
 			<td>{{$stock->qty}}</td>
-			<td>{{$stock->uom_id}}</td>
-			<td>{{$stock->remark}}</td>
+			{{-- <td>{{$stock->uom_id}}</td>
+			<td>{{$stock->remark}}</td> --}}
 
 			<td>
 			<form action = "{{route('stocks.destroy',$stock->id)}}" method = "post">

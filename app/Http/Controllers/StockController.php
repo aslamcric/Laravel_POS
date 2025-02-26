@@ -25,9 +25,23 @@ class StockController extends Controller
 {
     public function index()
     {
-        $stocks = Stock::paginate(10);
+
+        $stocks = DB::table('stocks as s')
+        ->select('p.id', 'p.name', DB::raw('SUM(s.qty) as qty'))
+        ->join('products as p', 'p.id', '=', 's.product_id')
+        ->groupBy('p.id', 'p.name')
+        ->paginate(10);
+
+
+
+
+        // $stocks = Stock::paginate(10);
         return view("pages.erp.stock.index", ["stocks" => $stocks]);
     }
+
+
+
+
     public function create()
     {
         return view("pages.erp.stock.create", ["products" => Product::all(), "transaction_types" => Transaction_Type::all(), "warehouses" => Warehouse::all(), "uom" => Uom::all()]);

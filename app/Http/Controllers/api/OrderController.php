@@ -32,13 +32,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // print_r($request->all());
+        print_r($request->all());
 
         $order = new Order;
         $order->customer_id = $request->customer_id;
         $order->order_total = $request->order_total;
         $order->discount = $request->discount;
-        $order->shipping_address = "";   //$request->shipping_address;
+        $order->shipping_address = "";
         $order->paid_amount = $request->paid_amount;
         $order->status_id = 1;
         $order->order_date = now();
@@ -59,16 +59,12 @@ class OrderController extends Controller
 
         foreach ($productsdata as $key => $product) {
             $orderdetail = new OrderDetail;
-            print_r($product);
-
-
-
+            // print_r($product);
             $orderdetail->order_id = $lastInsertedId;
             $orderdetail->product_id = $product['item_id'];
             $orderdetail->qty = $product['qty'];
             $orderdetail->price = $product['price'];
             $orderdetail->vat = $request->vat;
-
             $orderdetail->uom_id = 1;
             $orderdetail->discount = $product['total_discount'];
             date_default_timezone_set("Asia/Dhaka");
@@ -80,17 +76,17 @@ class OrderController extends Controller
 
 
 
-            // $stock = new Stock;
-            // $stock->product_id=$product['item_id'];
-            // $stock->transaction_type_id= 2;
-            // $stock->warehouse_id=1;
-            // $stock->qty=$product['qty'] * (-1);
-            // $stock->uom_id=1;
-            // $stock->remark="Sales";
-            // $stock->created_at=date('Y-m-d H:i:s');
-            // $stock->updated_at=date('Y-m-d H:i:s');
+            $stock = new Stock;
+            $stock->product_id=$product['item_id'];
+            $stock->transaction_type_id= 2;
+            $stock->warehouse_id=1;
+            $stock->qty=$product['qty'] * (-1);
+            $stock->uom_id=1;
+            $stock->remark="Sales";
+            $stock->created_at=date('Y-m-d H:i:s');
+            $stock->updated_at=date('Y-m-d H:i:s');
 
-            // $stock->save();
+            $stock->save();
         }
         return response()->json(['success' => "success"]);
     }
