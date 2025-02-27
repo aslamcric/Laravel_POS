@@ -120,5 +120,7 @@ class Cart {
 
 
   }//end class
-// console.log('ki on');
+
+//   console.log('kisu michu');
+
 

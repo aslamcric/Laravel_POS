@@ -62,7 +62,7 @@ class OrderController extends Controller
     }
     public function edit(Order $order)
     {
-        return view("pages.erp.order.edit", ["order" => $order, "customers" => Customer::all(), "status" => Status::all()]);
+        return view("pages.erp.order.edit", ["order" => $order, "customers" => Customer::all(), "status" => Statu::all()]);
     }
     public function update(Request $request, Order $order)
     {

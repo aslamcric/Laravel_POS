@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="invoice-address mb-4">
-                                    <h6 class="fw-bold mb-2 text-primary">Invoice From:</h6>
+                                    <h6 class="fw-bold mb-2 text-primary">Order Invoice From:</h6>
                                     <ul class="list-unstyled">
                                         <li>Laravel POS</li>
                                         <li>Dhaka, Bangladesh</li>

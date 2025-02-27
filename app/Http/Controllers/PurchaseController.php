@@ -8,7 +8,9 @@
 */
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Statu;
 use App\Models\Supplier;
 use App\Models\Status;
 
@@ -22,7 +24,7 @@ class PurchaseController extends Controller{
 		return view("pages.erp.purchase.index",["purchases"=>$purchases]);
 	}
 	public function create(){
-		return view("pages.erp.purchase.create",["suppliers"=>Supplier::all(),"status"=>Status::all()]);
+		return view("pages.erp.purchase.create",["suppliers"=>Supplier::all(),"status"=>Statu::all(), "products" => Product::all()]);
 	}
 	public function store(Request $request){
 		//Purchase::create($request->all());
@@ -59,7 +61,7 @@ date_default_timezone_set("Asia/Dhaka");
 		return view("pages.erp.purchase.show",["purchase"=>$purchase]);
 	}
 	public function edit(Purchase $purchase){
-		return view("pages.erp.purchase.edit",["purchase"=>$purchase,"suppliers"=>Supplier::all(),"status"=>Status::all()]);
+		return view("pages.erp.purchase.edit",["purchase"=>$purchase,"suppliers"=>Supplier::all(),"status"=>Statu::all()]);
 	}
 	public function update(Request $request,Purchase $purchase){
 		//Purchase::update($request->all());
@@ -95,5 +97,11 @@ date_default_timezone_set("Asia/Dhaka");
 		$purchase->delete();
 		return redirect()->route("purchases.index")->with('success', 'Deleted Successfully.');
 	}
+
+    public function find_supplier(Request $request)
+    {
+        $supplier = Supplier::find($request->id);
+        return response()->json(['supplier' => $supplier]);
+    }
 }
 ?>

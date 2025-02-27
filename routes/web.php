@@ -76,5 +76,7 @@ Route::resource('transactiontypes', TransactionTypeController::class);
 
 
 
+Route::post('find_supplier', [PurchaseController::class, 'find_supplier'])->name('find_supplier');
+
 Route::post('find_customer', [OrderController::class, 'find_customer'])->name('find_customer');
 Route::post('find_product', [OrderController::class, 'find_product']);
