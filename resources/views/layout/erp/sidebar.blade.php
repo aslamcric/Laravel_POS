@@ -154,8 +154,8 @@
                                     data-feather="shopping-bag"></i><span>Purchases</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('orders') }}"><i data-feather="file-minus"></i><span>Purchase
-                                    Order</span></a>
+                            <a href="{{ url('purchasesdetails') }}"><i data-feather="file-minus"></i><span>Purchase
+                                    Details</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/purchase-returns.html"><i

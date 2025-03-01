@@ -41,7 +41,7 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     {{-- <td>{{ $order->customer_id }}</td> --}}
-                    <td>{{ $order->customers->name }}</td>
+                    <td>{{ optional($order->customers)->name }}</td>
                     <td>{{ $order->order_total }}</td>
                     <td>{{ $order->discount }}</td>
                     <td>{{ optional($order->customers)->address }}</td>

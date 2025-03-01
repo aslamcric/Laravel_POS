@@ -9,6 +9,8 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class PurchasesDetail extends Model{
+    protected $table="purchases_details";
+    protected $fillable =['purchases_id', 'product_id', 'qty', 'price', 'discount', 'uom_id', 'discount'];
 
 
 }

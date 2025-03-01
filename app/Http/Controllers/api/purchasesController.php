@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Purchase;
+use App\Models\PurchasesDetail;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class purchasesController extends Controller
@@ -31,7 +33,7 @@ class purchasesController extends Controller
     public function store(Request $request)
     {
         // print_r($request->products[0]['description']);
-        print_r($request->all());
+        // print_r($request->all());
 
 
         $purchase = new Purchase;
@@ -49,7 +51,7 @@ class purchasesController extends Controller
         $purchase->shipping_address = "";
         // $purchase->description = $request->description;
         foreach ($request->products as $key => $product) {
-            $purchase->description =$product['description'];
+            $purchase->description = $product['description'];
         }
 
         date_default_timezone_set("Asia/Dhaka");
@@ -59,13 +61,54 @@ class purchasesController extends Controller
 
         $purchase->save();
 
+        if (isset($request->photo)) {
+            $imageName = $purchase->id . '.' . $request->photo->extension();
+            $purchase->photo = $imageName;
+            $purchase->update();
+            $request->photo->move(public_path('img'), $imageName);
+        }
 
-        if(isset($request->photo)){
-			$imageName=$purchase->id.'.'.$request->photo->extension();
-			$purchase->photo=$imageName;
-			$purchase->update();
-			$request->photo->move(public_path('img'),$imageName);
-		}
+
+        $lastInsertedId = $purchase->id;
+        $productsdata = $request->products;
+
+        foreach ($productsdata as $key => $product) {
+
+            $purchasesdetail = new PurchasesDetail;
+             print_r($product);
+
+
+            $purchasesdetail->purchases_id = $lastInsertedId;
+
+            $purchasesdetail->product_id = $product['item_id'];
+            $purchasesdetail->qty = $product['qty'];
+            $purchasesdetail->price = $product['price'];
+            $purchasesdetail->discount = $product['total_discount'];
+
+            date_default_timezone_set("Asia/Dhaka");
+            $purchasesdetail->created_at = date('Y-m-d H:i:s');
+            date_default_timezone_set("Asia/Dhaka");
+            $purchasesdetail->updated_at = date('Y-m-d H:i:s');
+
+            $purchasesdetail->save();
+
+
+            $stock = new Stock();
+            $stock->product_id=$product['item_id'];
+            $stock->transaction_type_id= 2;
+            $stock->warehouse_id=1;
+            $stock->qty=$product['qty'] * (1);
+            $stock->uom_id=1;
+            $stock->remark="Purchase";
+            $stock->created_at=date('Y-m-d H:i:s');
+            $stock->updated_at=date('Y-m-d H:i:s');
+
+            $stock->save();
+
+
+
+        };
+        return response()->json(['success' => "success"]);
     }
 
     /**
