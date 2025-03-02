@@ -5,10 +5,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\OrderReportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PurchaseReportController;
 use App\Http\Controllers\PurchasesDetailController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatuController;
 use App\Http\Controllers\StockAdjustmentController;
@@ -80,3 +83,12 @@ Route::post('find_supplier', [PurchaseController::class, 'find_supplier'])->name
 
 Route::post('find_customer', [OrderController::class, 'find_customer'])->name('find_customer');
 Route::post('find_product', [OrderController::class, 'find_product']);
+
+
+
+Route::get('/purchase-report', [PurchaseReportController::class, 'index']);
+Route::post('/purchase-report', [PurchaseReportController::class, 'show']);
+
+
+Route::get('/order-report', [OrderReportController::class, 'index']);
+Route::post('/order-report', [OrderReportController::class, 'show']);

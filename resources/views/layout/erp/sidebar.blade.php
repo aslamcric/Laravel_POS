@@ -197,7 +197,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="submenu-open">
+                {{-- <li class="submenu-open">
                     <h6 class="submenu-hdr">HRM</h6>
                     <ul>
                         <li>
@@ -268,16 +268,16 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Reports</h6>
                     <ul>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/sales-report.html"><i
-                                    data-feather="bar-chart-2"></i><span>Sales Report</span></a>
+                            <a href="{{url('order-report')}}"><i
+                                    data-feather="bar-chart-2"></i><span>Orders Report</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/purchase-report.html"><i
+                            <a href="{{url('purchase-report')}}"><i
                                     data-feather="pie-chart"></i><span>Purchase report</span></a>
                         </li>
                         <li>

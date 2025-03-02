@@ -14,6 +14,7 @@
 
 @endsection
 @section('page')
+
 <a class='btn btn-success' href="{{route('purchasesdetails.index')}}">Manage</a>
 <table class='table table-striped text-nowrap'>
 <tbody>
