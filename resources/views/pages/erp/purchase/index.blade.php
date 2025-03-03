@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Supplier Id</th>
-                <th>Status Id</th>
+                <th>Supplier</th>
+                <th>Payment Status</th>
                 <th>Order Total</th>
                 <th>Paid Amount</th>
                 <th>Discount</th>
@@ -19,7 +19,7 @@
                 {{-- <th>Photo</th> --}}
                 <th>Date</th>
                 <th>Shipping Address</th>
-                <th>Description</th>
+                {{-- <th>Description</th> --}}
 
                 <th>Action</th>
             </tr>
@@ -28,9 +28,8 @@
             @foreach ($purchases as $purchase)
                 <tr>
                     <td>{{ $purchase->id }}</td>
-                    {{-- <td>{{$purchase->supplier_id}}</td> --}}
                     <td>{{ optional($purchase->supplier)->name }}</td>
-                    <td>{{ $purchase->status_id }}</td>
+                    <td>{{ optional($purchase->payment_status)->name }}</td>
                     <td>{{ $purchase->order_total }}</td>
                     <td>{{ $purchase->paid_amount }}</td>
                     <td>{{ $purchase->discount }}</td>
@@ -38,7 +37,7 @@
                     {{-- <td><img src="{{asset('img/'.$purchase->photo)}}" width="100" /></td> --}}
                     <td>{{ $purchase->date }}</td>
                     <td>{{ optional($purchase->supplier)->address }}</td>
-                    <td>{{$purchase->description}}</td>
+                    {{-- <td>{{$purchase->description}}</td> --}}
 
                     <td>
                         <form action = "{{ route('purchases.destroy', $purchase->id) }}" method = "post">

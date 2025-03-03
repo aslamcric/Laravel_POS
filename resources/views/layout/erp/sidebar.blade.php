@@ -57,7 +57,7 @@
                         </li> --}}
                     </ul>
                 </li>
-                <li class="submenu-open">
+                {{-- <li class="submenu-open">
                     <h6 class="submenu-hdr">Inventory</h6>
                     <ul>
                         <li>
@@ -78,7 +78,7 @@
                         <li>
                             <a href="{{ url('category') }}"><i data-feather="codepen"></i><span>Category</span></a>
                         </li>
-                        {{-- <li>
+                        <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/sub-categories.html"><i data-feather="speaker"></i><span>Sub Category</span></a>
                         </li>
                         <li>
@@ -98,9 +98,9 @@
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/qrcode.html"><i data-feather="maximize"></i><span>Print QR Code</span></a>
-                        </li> --}}
+                        </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Stock</h6>
                     <ul>
@@ -281,12 +281,8 @@
                                     data-feather="pie-chart"></i><span>Purchase report</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/inventory-report.html"><i
-                                    data-feather="inbox"></i><span>Inventory Report</span></a>
-                        </li>
-                        <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/invoice-report.html"><i
-                                    data-feather="file"></i><span>Invoice Report</span></a>
+                            <a href="{{url('stock-report')}}"><i
+                                    data-feather="inbox"></i><span>Stock Report</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/supplier-report.html"><i

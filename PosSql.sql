@@ -84,6 +84,13 @@ CREATE TABLE status (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE `payment_statuses` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(50) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Warehouse Table
 CREATE TABLE warehouse (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -246,4 +253,4 @@ CREATE TABLE stock_adjustment_details (
 );
 
 
--- probot create-laravel-mvc -t customers -d laravel_pos
+-- probot create-laravel-mvc -t payment_statuses -d laravel_pos

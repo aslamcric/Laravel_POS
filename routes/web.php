@@ -17,10 +17,12 @@ use App\Http\Controllers\StatuController;
 use App\Http\Controllers\StockAdjustmentController;
 use App\Http\Controllers\StockAdjustmentDetailController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\StockReportController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\UomController;
 use App\Http\Controllers\WarehouseController;
+use App\Models\PaymentStatuse;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -54,6 +56,7 @@ Route::resource('customers', CustomerController::class);
 Route::resource('roles', RoleController::class);
 
 Route::resource('status', StatuController::class);
+Route::resource('paymentstatuse', PaymentStatuse::class);
 
 Route::resource('uoms', UomController::class);
 
@@ -92,3 +95,7 @@ Route::post('/purchase-report', [PurchaseReportController::class, 'show']);
 
 Route::get('/order-report', [OrderReportController::class, 'index']);
 Route::post('/order-report', [OrderReportController::class, 'show']);
+
+
+Route::get('/stock-report', [StockReportController::class, 'index'])->name('stock.report');
+Route::post('/stock-report', [StockReportController::class, 'show']);

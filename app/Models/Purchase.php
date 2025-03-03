@@ -15,6 +15,9 @@ class Purchase extends Model{
     public function supplier() {
         return $this->belongsTo(Supplier::class);
     }
+    public function payment_status() {
+        return $this->belongsTo(PaymentStatuse::class, 'status_id');
+    }
 
 }
 ?>
