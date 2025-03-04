@@ -44,15 +44,15 @@ class purchasesController extends Controller
         $purchase->discount = $request->discount;
         $purchase->vat = $request->vat;
         if (isset($request->photo)) {
-            $purchase->photo = $request->photo;
+            $purchase->photo = "";
         }
         $purchase->date = now();
-        // $purchase->shipping_address = $request->shipping_address;
-        $purchase->shipping_address = "";
-        // $purchase->description = $request->description;
-        foreach ($request->products as $key => $product) {
-            $purchase->description = $product['description'];
-        }
+        $purchase->shipping_address = $request->shipping_address;
+        // $purchase->shipping_address = "";
+        $purchase->description = "";
+        // foreach ($request->products as $key => $product) {
+        //     $purchase->description = $product['description'];
+        // }
 
         date_default_timezone_set("Asia/Dhaka");
         $purchase->created_at = date('Y-m-d H:i:s');
@@ -75,16 +75,13 @@ class purchasesController extends Controller
         foreach ($productsdata as $key => $product) {
 
             $purchasesdetail = new PurchasesDetail;
-             print_r($product);
-
+            //  print_r($product);
 
             $purchasesdetail->purchases_id = $lastInsertedId;
-
             $purchasesdetail->product_id = $product['item_id'];
             $purchasesdetail->qty = $product['qty'];
             $purchasesdetail->price = $product['price'];
             $purchasesdetail->discount = $product['total_discount'];
-
             date_default_timezone_set("Asia/Dhaka");
             $purchasesdetail->created_at = date('Y-m-d H:i:s');
             date_default_timezone_set("Asia/Dhaka");
@@ -93,7 +90,8 @@ class purchasesController extends Controller
             $purchasesdetail->save();
 
 
-            $stock = new Stock();
+            $stock = new Stock;
+            // print_r($stock);
             $stock->product_id=$product['item_id'];
             $stock->transaction_type_id= 2;
             $stock->warehouse_id=1;
@@ -104,8 +102,6 @@ class purchasesController extends Controller
             $stock->updated_at=date('Y-m-d H:i:s');
 
             $stock->save();
-
-
 
         };
         return response()->json(['success' => "success"]);

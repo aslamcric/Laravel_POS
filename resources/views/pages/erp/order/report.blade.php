@@ -26,21 +26,46 @@
                         <form method="POST" action="{{ url('/order-report') }}">
                             @csrf
                             <div class="row mb-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="start_date" class="form-label">Start Date</label>
                                     <input type="date" id="start_date" name="start_date" class="form-control"
                                         value="{{ old('start_date', $startDate ?? '') }}" required>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="end_date" class="form-label">End Date</label>
                                     <input type="date" id="end_date" name="end_date" class="form-control"
                                         value="{{ old('end_date', $endDate ?? '') }}" required>
                                 </div>
-                                <div class="col-md-4 d-flex align-items-end">
+                                <div class="col-md-3">
+                                    <label for="customer_id" class="form-label">Select Customer</label>
+                                    <select id="customer_id" name="customer_id" class="form-control">
+                                        <option value="">All Customers</option>
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}"
+                                                {{ old('customer_id', $customerId ?? '') == $customer->id ? 'selected' : '' }}>
+                                                {{ $customer->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="status_id" class="form-label">Order Status</label>
+                                    <select id="status_id" name="status_id" class="form-control">
+                                        <option value="">All Statuses</option>
+                                        @foreach ($statuses as $status)
+                                            <option value="{{ $status->id }}"
+                                                {{ old('status_id', $statusId ?? '') == $status->id ? 'selected' : '' }}>
+                                                {{ $status->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
                                     <button type="submit" class="btn btn-primary">Generate Report</button>
                                 </div>
                             </div>
                         </form>
+
 
                         @if (!empty($orders))
                             <table class="table table-bordered mt-4">
@@ -52,11 +77,10 @@
                                         <th>Discount</th>
                                         <th>Shipping Address</th>
                                         <th>Paid Amount</th>
-                                        <th>Status Id</th>
+                                        <th>Order Status</th>
                                         <th>Order Date</th>
                                         <th>Delivery Date</th>
                                         <th>Vat</th>
-                                        <th>Remark</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,11 +92,10 @@
                                             <td>{{ $order->discount }}</td>
                                             <td>{{ optional($order->customers)->address }}</td>
                                             <td>{{ $order->paid_amount }}</td>
-                                            <td>{{ $order->status_id }}</td>
+                                            <td>{{ optional($order->statuse)->name }}</td>
                                             <td>{{ $order->order_date }}</td>
                                             <td>{{ $order->delivery_date }}</td>
                                             <td>{{ $order->vat }}</td>
-                                            <td>{{ $order->remark }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

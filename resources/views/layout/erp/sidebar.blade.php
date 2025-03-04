@@ -57,7 +57,7 @@
                         </li> --}}
                     </ul>
                 </li>
-                {{-- <li class="submenu-open">
+                <li class="submenu-open">
                     <h6 class="submenu-hdr">Inventory</h6>
                     <ul>
                         <li>
@@ -67,18 +67,18 @@
                             <a href="{{ url('products/create') }}"><i data-feather="plus-square"></i><span>Create
                                     Product</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/expired-products.html"><i
                                     data-feather="codesandbox"></i><span>Expired Products</span></a>
-                        </li>
-                        <li>
+                        </li> --}}
+                        {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/low-stocks.html"><i
                                     data-feather="trending-down"></i><span>Low Stocks</span></a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ url('category') }}"><i data-feather="codepen"></i><span>Category</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/sub-categories.html"><i data-feather="speaker"></i><span>Sub Category</span></a>
                         </li>
                         <li>
@@ -98,9 +98,9 @@
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/qrcode.html"><i data-feather="maximize"></i><span>Print QR Code</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
-                </li> --}}
+                </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Stock</h6>
                     <ul>

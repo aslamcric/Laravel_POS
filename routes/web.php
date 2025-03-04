@@ -22,6 +22,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionTypeController;
 use App\Http\Controllers\UomController;
 use App\Http\Controllers\WarehouseController;
+use App\Models\OrderStatu;
+use App\Models\OrderStatuse;
 use App\Models\PaymentStatuse;
 use Illuminate\Support\Facades\Route;
 
@@ -41,13 +43,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::post('supplier/search', [SupplierController::class,'search']);
 Route::resource('supplier', SupplierController::class);
 
 Route::post('category/search', [CategoryController::class,'search']);
 Route::resource('category', CategoryController::class);
-
 
 Route::resource('manufacturers', ManufacturerController::class);
 
@@ -57,36 +57,29 @@ Route::resource('roles', RoleController::class);
 
 Route::resource('status', StatuController::class);
 Route::resource('paymentstatuse', PaymentStatuse::class);
+Route::resource('orderstatuses', OrderStatuse::class);
 
 Route::resource('uoms', UomController::class);
 
 Route::resource('warehouses', WarehouseController::class);
 
 Route::resource('orders', OrderController::class);
-
 Route::resource('orderdetails', OrderDetailController::class);
 
 Route::resource('products', ProductController::class);
 
 Route::resource('purchases', PurchaseController::class);
-
 Route::resource('purchasesdetails', PurchasesDetailController::class);
 
 Route::resource('stocks', StockController::class);
-
 Route::resource('stockadjustments', StockAdjustmentController::class);
-
 Route::resource('stockadjustmentdetails', StockAdjustmentDetailController::class);
 
 Route::resource('transactiontypes', TransactionTypeController::class);
 
-
-
 Route::post('find_supplier', [PurchaseController::class, 'find_supplier'])->name('find_supplier');
-
 Route::post('find_customer', [OrderController::class, 'find_customer'])->name('find_customer');
 Route::post('find_product', [OrderController::class, 'find_product']);
-
 
 
 Route::get('/purchase-report', [PurchaseReportController::class, 'index']);

@@ -91,6 +91,24 @@ CREATE TABLE `payment_statuses` (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE order_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(50),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO order_status (status_name, description) VALUES
+('Pending', 'Order has been placed but not processed yet'),
+('Processing', 'Order is being prepared'),
+('Shipped', 'Order has been shipped to the customer'),
+('Delivered', 'Order has been delivered successfully'),
+('Cancelled', 'Order has been cancelled by the customer or seller'),
+('Refunded', 'Order has been refunded to the customer');
+
+
+
 -- Warehouse Table
 CREATE TABLE warehouse (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -253,4 +271,4 @@ CREATE TABLE stock_adjustment_details (
 );
 
 
--- probot create-laravel-mvc -t payment_statuses -d laravel_pos
+-- probot create-laravel-mvc -t order_status -d laravel_pos

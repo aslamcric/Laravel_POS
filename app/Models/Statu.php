@@ -6,16 +6,13 @@
 * Date: 2/19/2025 9:25:57 AM
 * Contact: towhid1@outlook.com
 */
-namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-class Statu extends Model{
 
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Statu extends Model
+{
     protected $table = 'status';
 
-    // protected $fillable = [
-    //     // '', collumn name
-    // ];
-
-
 }
-?>

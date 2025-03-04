@@ -12,6 +12,12 @@ class Order extends Model{
     public function customers(){
         return  $this->belongsTo(Customer::class, 'customer_id');
     }
+
+    public function statuse(){
+        return  $this->belongsTo(Statu::class, 'status_id');
+    }
+
+
     // public function shipping_address(){
     //     return  $this->belongsTo(Customer::class, 'shipping_address');
     // }

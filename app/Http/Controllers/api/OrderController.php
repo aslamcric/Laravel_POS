@@ -32,7 +32,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->all());
+        // print_r($request->all());
 
         $order = new Order;
         $order->customer_id = $request->customer_id;
