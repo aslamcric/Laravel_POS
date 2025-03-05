@@ -10,10 +10,9 @@ class StockReportController extends Controller
 {
     public function index()
     {
-        $products  = Product::all();
+        $products = Product::all();
         return view('pages.erp.stock.report', ['stocks' => [], 'products' => $products]);
     }
-
 
     public function show(Request $request)
     {
@@ -24,8 +23,11 @@ class StockReportController extends Controller
 
         $query = Stock::query();
 
-        if ($startDate && $endDate) {
-            $query->whereBetween('updated_at', [$startDate, $endDate]);
+        if (!empty($startDate) && !empty($endDate)) {
+            $query->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($startDate)),
+                date('Y-m-d 23:59:59', strtotime($endDate))
+            ]);
         }
 
         if (!empty($remark)) {
@@ -36,7 +38,7 @@ class StockReportController extends Controller
             $query->where('product_id', $product_id);
         }
 
-        $stocks = $query->orderBy('updated_at', 'asc')->get();
+        $stocks = $query->orderBy('created_at', 'asc')->get();
         $products = Product::all();
 
         return view('pages.erp.stock.report', compact('stocks', 'startDate', 'endDate', 'remark', 'product_id', 'products'));

@@ -1,16 +1,23 @@
 <?php
 
+use App\Http\Controllers\api\PurchaReturnController;
+use App\Http\Controllers\api\PurchaseReturnController as ApiPurchaseReturnController;
+use App\Http\Controllers\api\PurchaseReturnsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\OrderReportController;
+use App\Http\Controllers\OrderStatuseController;
+use App\Http\Controllers\PaymentStatuseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PurchaseReportController;
+use App\Http\Controllers\PurchaseReturnController;
 use App\Http\Controllers\PurchasesDetailController;
+use App\Http\Controllers\PurchaseStatuseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatuController;
@@ -25,6 +32,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Models\OrderStatu;
 use App\Models\OrderStatuse;
 use App\Models\PaymentStatuse;
+use App\Models\PurchaseStatuse;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -56,8 +64,12 @@ Route::resource('customers', CustomerController::class);
 Route::resource('roles', RoleController::class);
 
 Route::resource('status', StatuController::class);
-Route::resource('paymentstatuse', PaymentStatuse::class);
-Route::resource('orderstatuses', OrderStatuse::class);
+Route::resource('purchasestatuses', PurchaseStatuseController::class);
+
+Route::resource('paymentstatuse', PaymentStatuseController::class);
+Route::resource('orderstatuses', OrderStatuseController::class);
+
+
 
 Route::resource('uoms', UomController::class);
 
@@ -70,6 +82,7 @@ Route::resource('products', ProductController::class);
 
 Route::resource('purchases', PurchaseController::class);
 Route::resource('purchasesdetails', PurchasesDetailController::class);
+Route::resource('purchasereturns', PurchaseReturnController::class);
 
 Route::resource('stocks', StockController::class);
 Route::resource('stockadjustments', StockAdjustmentController::class);
