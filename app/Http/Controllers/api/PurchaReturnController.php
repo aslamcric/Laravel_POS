@@ -4,7 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\PurchaseReturn;
+use App\Models\PurchaseStatuse;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class PurchaReturnController extends Controller
@@ -23,7 +26,11 @@ class PurchaReturnController extends Controller
      */
     public function create()
     {
-        //
+        // $suppliers = Supplier::all();
+        // $products = Product::all();
+
+        // // return view('orders.create', compact('suppliers', 'products'));
+        // return view("pages.erp.purchasereturn.create", ["purchasess" => Purchase::all(), "suppliers" => Supplier::all(), "purchase_statuss" => PurchaseStatuse::all(), "products" => Product::all()]);
     }
 
     /**
@@ -31,7 +38,7 @@ class PurchaReturnController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->all());
+        // print_r($request->all());
 
         $purchasereturn = new PurchaseReturn;
         $purchasereturn->purchases_id = $request->purchases_id;
@@ -50,37 +57,8 @@ class PurchaReturnController extends Controller
         $purchasereturn->updated_at = date('Y-m-d H:i:s');
 
         $purchasereturn->save();
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $lastInsertedId = $purchasereturn->id;
+        $productsdata = $request->products;
     }
 }

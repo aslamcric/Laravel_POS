@@ -64,12 +64,12 @@
                                         <th>#</th>
                                         <th>
                                             <select class="form-control" name="product_id" id="product_id">
-                                                {{-- <option value="">Select Product</option>
+                                                <option value="">Select Product</option>
                                                 @forelse ($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                 @empty
                                                     <option value="">No Product Found</option>
-                                                @endforelse --}}
+                                                @endforelse
                                             </select>
                                         </th>
 
