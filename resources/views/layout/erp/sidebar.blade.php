@@ -127,8 +127,8 @@
                             <a href="{{ url('orderdetails') }}"><i data-feather="file-text"></i><span>Order Details</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/sales-returns.html"><i
-                                    data-feather="copy"></i><span>Sales Return</span></a>
+                            <a href="{{ url('purchasereturns')}}"><i
+                                    data-feather="copy"></i><span>Order Return</span></a>
                         </li>
                         {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/quotation-list.html"><i data-feather="save"></i><span>Quotation</span></a>

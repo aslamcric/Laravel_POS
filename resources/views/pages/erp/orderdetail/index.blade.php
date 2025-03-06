@@ -35,7 +35,7 @@
 		<tr>
 			<td>{{$orderdetail->id}}</td>
 			<td>{{$orderdetail->order_id}}</td>
-			<td>{{$orderdetail->product_id}}</td>
+			<td>{{optional ($orderdetail->products)->name}}</td>
 			<td>{{$orderdetail->qty}}</td>
 			<td>{{$orderdetail->price}}</td>
 			<td>{{$orderdetail->vat}}</td>
@@ -55,6 +55,9 @@
 	@endforeach
 	</tbody>
 </table>
+<div class="d-flex justify-content-end mt-5">
+    {!! $orderdetails->links('pagination::bootstrap-5') !!}
+</div>
 @endsection
 @section('script')
 

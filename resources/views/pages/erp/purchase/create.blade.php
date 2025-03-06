@@ -109,8 +109,8 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <a class="btn btn-success me-2 btn_process">Process</a>
-                            {{-- <a class="btn btn-success me-2 btn_process" href="{{ url('purchases') }}">Process</a> --}}
+                            {{-- <a class="btn btn-success me-2 btn_process">Process</a> --}}
+                            <a class="btn btn-success me-2 btn_process" href="{{ url('purchases') }}">Process</a>
                         </div>
                     </div>
                 </div>
@@ -313,8 +313,8 @@
                         console.log(res);
 
                         // Clear the cart after successful order processing
-                       // cart.clearCart();
-                        //printCart();
+                       cart.clearCart();
+                        printCart();
                     },
                     error: function(xhr, status, error) {
                         console.log(error);

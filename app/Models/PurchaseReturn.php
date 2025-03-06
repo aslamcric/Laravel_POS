@@ -12,5 +12,17 @@ class PurchaseReturn extends Model{
     protected $table="purchase_returns";
     protected $fillable =['purchases_id', 'supplier_id', 'purchase_status_id', 'order_total', 'paid_amount', 'discount', 'vat', 'date', 'shipping_address', 'description'];
 
+
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function products() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function purchase_status() {
+        return $this->belongsTo(PurchaseStatuse::class);
+    }
 }
 ?>

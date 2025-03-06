@@ -14,21 +14,21 @@
 
 @endsection
 @section('page')
-<a href="{{route('purchasereturns.create')}}">New PurchaseReturn</a>
+<a class="btn btn-primary" href="{{route('purchasereturns.create')}}">New PurchaseReturn</a>
 <table class="table table-hover text-nowrap">
 	<thead>
 		<tr>
 			<th>Id</th>
-			<th>Purchases Id</th>
-			<th>Supplier Id</th>
-			<th>Purchase Status Id</th>
-			<th>Order Total</th>
+			{{-- <th>Purchases Id</th> --}}
+			<th>Supplier</th>
+			<th>Description</th>
+			{{-- <th>Order Total</th> --}}
 			<th>Paid Amount</th>
 			<th>Discount</th>
 			<th>Vat</th>
+            <th>Purchase Status</th>
 			<th>Date</th>
 			<th>Shipping Address</th>
-			<th>Description</th>
 			<th>Created At</th>
 			<th>Updated At</th>
 
@@ -39,16 +39,17 @@
 	@foreach($purchasereturns as $purchasereturn)
 		<tr>
 			<td>{{$purchasereturn->id}}</td>
-			<td>{{$purchasereturn->purchases_id}}</td>
-			<td>{{$purchasereturn->supplier_id}}</td>
-			<td>{{$purchasereturn->purchase_status_id}}</td>
-			<td>{{$purchasereturn->order_total}}</td>
+			{{-- <td>{{$purchasereturn->purchases_id}}</td> --}}
+			<td>{{optional($purchasereturn->supplier)->name}}</td>
+            <td>{{$purchasereturn->description}}</td>
+			{{-- <td>{{$purchasereturn->order_total}}</td> --}}
 			<td>{{$purchasereturn->paid_amount}}</td>
 			<td>{{$purchasereturn->discount}}</td>
 			<td>{{$purchasereturn->vat}}</td>
+            <td>{{optional($purchasereturn->purchase_status)->name}}</td>
 			<td>{{$purchasereturn->date}}</td>
-			<td>{{$purchasereturn->shipping_address}}</td>
-			<td>{{$purchasereturn->description}}</td>
+			<td>{{optional($purchasereturn->supplier)->address}}</td>
+
 			<td>{{$purchasereturn->created_at}}</td>
 			<td>{{$purchasereturn->updated_at}}</td>
 

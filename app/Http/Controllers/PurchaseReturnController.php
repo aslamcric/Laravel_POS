@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseReturn;
 use App\Models\Purchases;
@@ -30,7 +31,7 @@ class PurchaseReturnController extends Controller
     }
     public function create()
     {
-        return view("pages.erp.purchasereturn.create", ["purchasess" => Purchase::all(), "suppliers" => Supplier::all(), "purchase_statuss" => PurchaseStatuse::all()]);
+        return view("pages.erp.purchasereturn.create", ["purchasess" => Purchase::all(), "suppliers" => Supplier::all(), "purchase_statuss" => PurchaseStatuse::all(), "products" => Product::all()]);
     }
     public function store(Request $request)
     {

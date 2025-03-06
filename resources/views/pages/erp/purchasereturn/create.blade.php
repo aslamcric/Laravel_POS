@@ -74,7 +74,7 @@
                                         </th>
 
                                         <th>
-                                            <textarea disabled class="form-control p_description" name="" id="" cols="30" rows="2"></textarea>
+                                            <textarea class="form-control p_description" name="" id="" cols="30" rows="2"></textarea>
                                         </th>
                                         <th><input type="text" disabled class="form-control p_price"></th>
                                         <th><input type="number" class="form-control p_qty"></th>
@@ -109,8 +109,8 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <a class="btn btn-success me-2 btn_process">Process</a>
-                            {{-- <a class="btn btn-success me-2 btn_process" href="{{ url('purchases') }}">Process</a> --}}
+                            {{-- <a class="btn btn-success me-2 btn_process">Process</a> --}}
+                            <a class="btn btn-success me-2 btn_process" href="{{ url('purchases') }}">Process</a>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                             // console.log(res);
 
                             if (res.product) {
-                                $(".p_description").val(res.product.description);
+                                // $(".p_description").val(res.product.description);
                                 $(".p_price").val(res.product.price);
                                 $(".p_qty").val(1);
                                 updateTotalandSubtotal();
@@ -299,7 +299,7 @@
 
                 // Send the order data via AJAX
                 $.ajax({
-                    url: "{{ url('api/purchases') }}",
+                    url: "{{ url('api/purchasereturns') }}",
                     type: 'Post',
                     data: {
                         supplier_id: supplier_id,
@@ -313,8 +313,8 @@
                         console.log(res);
 
                         // Clear the cart after successful order processing
-                       // cart.clearCart();
-                        //printCart();
+                       cart.clearCart();
+                        printCart();
                     },
                     error: function(xhr, status, error) {
                         console.log(error);

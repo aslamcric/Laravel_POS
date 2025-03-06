@@ -20,7 +20,7 @@
 		<tr>
 			<th>Id</th>
 			<th>Purchases Id</th>
-			<th>Product Id</th>
+			<th>Product</th>
 			<th>Qty</th>
 			<th>Price</th>
 			<th>Discount</th>
@@ -33,7 +33,7 @@
 		<tr>
 			<td>{{$purchasesdetail->id}}</td>
 			<td>{{$purchasesdetail->purchases_id}}</td>
-			<td>{{$purchasesdetail->product_id}}</td>
+			<td>{{optional ($purchasesdetail->products)->name}}</td>
 			<td>{{$purchasesdetail->qty}}</td>
 			<td>{{$purchasesdetail->price}}</td>
 			<td>{{$purchasesdetail->discount}}</td>
@@ -51,6 +51,10 @@
 	@endforeach
 	</tbody>
 </table>
+
+<div class="d-flex justify-content-end mt-5">
+    {!! $purchasesdetails->links('pagination::bootstrap-5') !!}
+</div>
 @endsection
 @section('script')
 

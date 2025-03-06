@@ -304,8 +304,8 @@
                         console.log(res);
 
                         // Clear the cart after successful order processing
-                        // cart.clearCart();
-                        // printCart();
+                        cart.clearCart();
+                        printCart();
                     },
                     error: function(xhr, status, error) {
                         console.log(error);

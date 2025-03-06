@@ -9,6 +9,10 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class PurchaseReturnDetail extends Model{
+    public function products() {
+        
+        return $this->belongsTo(Product::class);
+    }
 
 
 }

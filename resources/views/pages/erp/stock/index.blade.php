@@ -53,6 +53,9 @@
 	@endforeach
 	</tbody>
 </table>
+<div class="d-flex justify-content-end mt-5">
+    {!! $stocks->links('pagination::bootstrap-5') !!}
+</div>
 @endsection
 @section('script')
 
