@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Statu;
 use App\Models\Status;
@@ -58,7 +59,8 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
-        return view("pages.erp.order.show", ["order" => $order]);
+        $orderdetails = OrderDetail::where ('order_id', $order->id)->get();
+        return view("pages.erp.order.show", ["order" => $order, 'orderdetails'=>$orderdetails]);
     }
     public function edit(Order $order)
     {
