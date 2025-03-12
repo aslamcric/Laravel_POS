@@ -107,14 +107,14 @@
                         <li>
                             <a href="{{ url('stocks') }}"><i data-feather="package"></i><span>Manage Stock</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ url('stockadjustments') }}"><i data-feather="clipboard"></i><span>Stock
                                     Adjustment</span></a>
                         </li>
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/stock-transfer.html"><i
                                     data-feather="truck"></i><span>Stock Transfer</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="submenu-open">
@@ -126,10 +126,10 @@
                         <li>
                             <a href="{{ url('orderdetails') }}"><i data-feather="file-text"></i><span>Order Details</span></a>
                         </li>
-                        <li>
-                            <a href="{{ url('purchasereturns')}}"><i
+                        {{-- <li>
+                            <a href=""><i
                                     data-feather="copy"></i><span>Order Return</span></a>
-                        </li>
+                        </li> --}}
                         {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/quotation-list.html"><i data-feather="save"></i><span>Quotation</span></a>
                         </li>
@@ -158,7 +158,7 @@
                                     Details</span></a>
                         </li>
                         <li>
-                            <a href="https://dreamspos.dreamstechnologies.com/html/template/purchase-returns.html"><i
+                            <a href={{ url('purchasereturns')}}><i
                                     data-feather="refresh-cw"></i><span>Purchase Return</span></a>
                         </li>
                     </ul>
@@ -188,13 +188,13 @@
                         <li>
                             <a href="{{ url('supplier') }}"><i data-feather="users"></i><span>Suppliers</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/store-list.html"><i
                                     data-feather="home"></i><span>Stores</span></a>
                         </li>
                         <li>
                             <a href="{{ url('warehouses') }}"><i data-feather="archive"></i><span>Warehouses</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 {{-- <li class="submenu-open">
@@ -284,7 +284,7 @@
                             <a href="{{url('stock-report')}}"><i
                                     data-feather="inbox"></i><span>Stock Report</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/supplier-report.html"><i
                                     data-feather="user-check"></i><span>Supplier Report</span></a>
                         </li>
@@ -307,7 +307,7 @@
                         <li>
                             <a href="https://dreamspos.dreamstechnologies.com/html/template/profit-and-loss.html"><i
                                     data-feather="pie-chart"></i><span>Profit & Loss</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="submenu-open">

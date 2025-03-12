@@ -14,7 +14,8 @@
 
 @endsection
 @section('page')
-<a href="{{route('stocks.create')}}">New Stock</a>
+{{-- <a href="{{route('stocks.create')}}">New Stock</a> --}}
+<h1>Stock of Products</h1>
 <table class="table table-hover text-nowrap">
 	<thead>
 		<tr>
@@ -26,7 +27,7 @@
 			{{-- <th>Uom Id</th>
 			<th>Remark</th> --}}
 
-			<th>Action</th>
+			{{-- <th>Action</th> --}}
 		</tr>
 	</thead>
 	<tbody>
@@ -40,7 +41,7 @@
 			{{-- <td>{{$stock->uom_id}}</td>
 			<td>{{$stock->remark}}</td> --}}
 
-			<td>
+			{{-- <td>
 			<form action = "{{route('stocks.destroy',$stock->id)}}" method = "post">
 				<a class= 'btn btn-primary' href = "{{route('stocks.show',$stock->id)}}">View</a>
 				<a class= 'btn btn-success' href = "{{route('stocks.edit',$stock->id)}}"> Edit </a>
@@ -48,7 +49,7 @@
 				@csrf
 				<input type = "submit" class="btn btn-danger" name = "delete" value = "Delete" />
 			</form>
-			</td>
+			</td> --}}
 		</tr>
 	@endforeach
 	</tbody>

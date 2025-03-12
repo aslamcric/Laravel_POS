@@ -13,7 +13,7 @@
                                 <div class="invoice-address mb-4">
                                     <h6 class="fw-bold mb-2 text-primary">Order Invoice From:</h6>
                                     <ul class="list-unstyled">
-                                        <li>Invoice: IN-100{{ $order->id }}</li>
+                                        <li>Invoice: NO-100{{ $order->id }}</li>
                                         <li>Phone: 01793 956 777</li>
                                         <li>Email: mdaslamcric@gmail.com</li>
                                     </ul>
@@ -38,7 +38,6 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Product</th>
-                                        {{-- <th>Description</th> --}}
                                         <th>Qty</th>
                                         <th>Price</th>
                                         <th>Discount</th>
@@ -47,51 +46,46 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $subtotal = null;
-                                        $total = null;
-
+                                        $total = 0;
+                                        $total_discount = 0;
                                     @endphp
                                     @foreach ($orderdetails as $orderdetail)
+                                        @php
+                                            $subtotal =
+                                                $orderdetail->price * $orderdetail->qty - $orderdetail->discount;
+                                            $total += $subtotal;
+                                            $total_discount += $orderdetail->discount;
+                                        @endphp
                                         <tr>
-                                            <td>{{ $loop->iteration  }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ optional($orderdetail->products)->name }}</td>
                                             <td>{{ $orderdetail->qty }}</td>
-                                            <td>{{ $orderdetail->price }}</td>
-                                            <td>{{ $orderdetail->discount }}</td>
-                                            <td>{{ $subtotal+=$orderdetail->price*$orderdetail->qty }}</td>
+                                            <td>{{ number_format($orderdetail->price, 2) }}</td>
+                                            <td>{{ number_format($orderdetail->discount, 2) }}</td>
+                                            <td>{{ number_format($subtotal, 2) }}</td>
                                         </tr>
-                                        @php
-                                        // $subtotal = null;
-                                        $total+= $subtotal;
-
-                                    @endphp
-
                                     @endforeach
-
-                                    @php
-                                        // $subtotal = null;
-                                        $total+= $subtotal;
-
-                                    @endphp
-
-
                                 </tbody>
+                                @php
+                                    $tax = $total * 0.05;
+                                    $grandTotal = $total + $tax - $total_discount;
+                                @endphp
                                 <tfoot>
                                     <tr>
                                         <td colspan="5" class="text-end">Total</td>
-                                        <td>{{ $total}}</td>
+                                        <td>{{ number_format($total, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-end">Tax (5%)</td>
-                                        <td>$6.25</td>
+                                        <td>{{ number_format($tax, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5" class="text-end">Discount</td>
-                                        <td>$5.00</td>
+                                        <td colspan="5" class="text-end">Total Discount</td>
+                                        <td>{{ number_format($total_discount, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-end fw-bold">Grand Total</td>
-                                        <td class="fw-bold">$126.25</td>
+                                        <td class="fw-bold">{{ number_format($grandTotal, 2) }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -111,13 +105,8 @@
 @section('script')
     <script>
         function printInvoice() {
-            // Print Button Hide
             document.getElementById('printButton').style.display = 'none';
-
-            // Print Invoice
             window.print();
-
-            // Print Button Show Again After Print
             setTimeout(() => {
                 document.getElementById('printButton').style.display = 'block';
             }, 1000);

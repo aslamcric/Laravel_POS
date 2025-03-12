@@ -10,8 +10,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchasesDetail;
 use App\Models\Statu;
 use App\Models\Supplier;
 use App\Models\Status;
@@ -66,7 +68,9 @@ class PurchaseController extends Controller
     public function show($id)
     {
         $purchase = Purchase::find($id);
-        return view("pages.erp.purchase.show", ["purchase" => $purchase]);
+        // $purchasedetails = PurchasesDetail::all();
+        $purchasedetails = PurchasesDetail::where ('purchases_id', $purchase->id)->get();
+        return view("pages.erp.purchase.show", ["purchase" => $purchase, "purchasedetails" => $purchasedetails]);
     }
     public function edit(Purchase $purchase)
     {
