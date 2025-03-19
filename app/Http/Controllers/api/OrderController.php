@@ -30,7 +30,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * for Laravel - React Project.
      */
     public function store_react(Request $request)
     {
@@ -103,7 +103,7 @@ class OrderController extends Controller
 
 
 
-
+    // Only for Laravel
 
     public function store(Request $request)
     {
