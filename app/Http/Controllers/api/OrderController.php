@@ -7,8 +7,12 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Stock;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class OrderController extends Controller
 {
@@ -61,7 +65,7 @@ class OrderController extends Controller
 
 
 
-             foreach ($request->items as $key => $product) {
+            foreach ($request->items as $key => $product) {
                 $orderdetail = new OrderDetail;
                 $orderdetail->order_id = $lastInsertedId;
                 $orderdetail->product_id = $product['product_id'];
@@ -211,4 +215,83 @@ class OrderController extends Controller
         $product = Product::get();
         return response()->json(['product' => $product]);
     }
+
+    public function orders()
+    {
+        $order = Order::with('customers', 'orter_status')->get();
+        return response()->json(['orders' => $order]);
+    }
+
+    public function orderDetail()
+    {
+        $orderDetail = OrderDetail::get();
+        return response()->json(['orderDetail' => $orderDetail]);
+    }
+
+
+    public function customer_store(Request $request)
+    {
+
+        // Store the customer data (example)
+        $customer = new Customer();
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+        $customer->photo = $photoPath ?? null;
+        $customer->save();
+
+        return response()->json(['message' => 'Customer created successfully'], 201);
+    }
+
+    public function order_invoice(Request $request)
+    {
+        $order = Order::with('customers', 'order_details.products', 'order_details')->where("id", $request->id)->get();
+        return response()->json(['order' => $order], 201);
+    }
+
+    public function stock()
+    {
+        // $stock = Stock::get();
+        $stock = DB::Table('stocks as s')
+                ->select('p.id', 'p.name', DB::raw('SUM(s.qty) as qty'))
+                ->join('products as p', 'p.id', '=', 's.product_id')
+                ->groupBy('p.id', 'p.name')
+                ->get();
+        return response()->json(['stock' => $stock]);
+    }
+
+    // public function stock()
+    // {
+    //     $stock = DB::table('stocks as s')
+    //         ->select('p.id', 'p.name', DB::raw('SUM(s.qty) as qty'))
+    //         ->join('products as p', 'p.id', '=', 's.product_id')
+    //         ->groupBy('p.id', 'p.name')
+    //         ->paginate(10);
+
+    //     return response()->json(['stock' => $stock]);
+    // }
+
+
+
+    public function product()
+    {
+        $product = Product::with('categories')->get();
+        return response()->json(['product' => $product]);
+    }
+
+
+    public function supplier()
+    {
+        $supplier = Supplier::get();
+        return response()->json(['supplier' => $supplier]);
+    }
+
+
+    public function purchase()
+    {
+        $purchase = Purchase::with("supplier", "payment_status")->get();
+        return response()->json(['purchase' => $purchase]);
+    }
+
 }

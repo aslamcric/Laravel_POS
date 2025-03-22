@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::resource('orders', OrderController::class);
+// Route::resource('orders', OrderController::class);
 Route::resource('purchases', purchasesController::class);
 
 Route::resource('purchasereturns', PurchaReturnController::class);
@@ -21,3 +21,17 @@ Route::resource('purchasereturns', PurchaReturnController::class);
 Route::get('find_customer',[ OrderController::class, 'find_customer']);
 Route::get('find_product',[ OrderController::class, 'find_product']);
 Route::post('orders/store_react', [OrderController::class,'store_react']);
+
+Route::get('orders', [OrderController::class,'orders']);
+
+Route::get('orders/{id}', [OrderController::class,'order_invoice']);
+Route::get('orderDetails', [OrderController::class,'orderDetail']);
+Route::post('api/find_customer', [OrderController::class, 'customer_store']);
+
+Route::get('stock', [OrderController::class,'stock']);
+
+Route::get('product', [OrderController::class,'product']);
+
+Route::get('supplier', [OrderController::class,'supplier']);
+
+Route::get('purchase', [OrderController::class,'purchase']);

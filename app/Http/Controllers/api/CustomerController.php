@@ -15,6 +15,9 @@ class CustomerController extends Controller
     {
         $customers = Customer::all();
         return response()->json(['customers' => $customers]);
+
+        $customer = Customer::get();
+        return response()->json(['customer' => $customer]);
     }
 
     /**

@@ -13,6 +13,9 @@ class Customer extends Model{
     // public function shipping_address(){
     //     return  $this->hasMany(Customer::class, 'shipping_address');
     // }
+    function order(){
+        return $this->hasMany(Order::class);
+    }
 
 }
 ?>

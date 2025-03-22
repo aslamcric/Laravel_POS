@@ -20,14 +20,17 @@ class Order extends Model{
     public function products(){
         return  $this->belongsTo(Product::class, 'product_id');
     }
+
+
     public function orter_status(){
         return  $this->belongsTo(Statu::class, 'status_id');
     }
 
+    public function order_details(){
+        return  $this->hasMany(OrderDetail::class);
+    }
 
-    // public function shipping_address(){
-    //     return  $this->belongsTo(Customer::class, 'shipping_address');
-    // }
+
 
 
 }
