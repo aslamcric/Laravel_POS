@@ -106,8 +106,8 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <a class="btn btn-success me-2 btn_process">Process</a>
-                            {{-- <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a> --}}
+                            {{-- <a class="btn btn-success me-2 btn_process">Process</a> --}}
+                            <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a>
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
 
                 // Send the order data via AJAX
                 $.ajax({
-                    url: "{{ url('api/orders') }}",
+                    url: "{{ url('api/ordersLaravel') }}",
                     type: 'Post',
                     data: {
                         customer_id: customer_id,

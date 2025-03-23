@@ -13,7 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-// Route::resource('orders', OrderController::class);
+Route::resource('ordersLaravel', OrderController::class);
 Route::resource('purchases', purchasesController::class);
 
 Route::resource('purchasereturns', PurchaReturnController::class);
