@@ -4,13 +4,13 @@ use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\PurchaReturnController;
 use App\Http\Controllers\api\PurchaseReturnController;
 use App\Http\Controllers\api\purchasesController;
-use App\Http\Controllers\PurchaseReturnController as ControllersPurchaseReturnController;
+use App\Http\Controllers\api\vue\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 
 Route::resource('ordersLaravel', OrderController::class);
@@ -35,3 +35,8 @@ Route::get('product', [OrderController::class,'product']);
 Route::get('supplier', [OrderController::class,'supplier']);
 
 Route::get('purchase', [OrderController::class,'purchase']);
+
+
+
+// Api for vue
+Route::apiResource('customers', CustomerController::class);
