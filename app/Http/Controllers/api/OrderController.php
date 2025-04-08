@@ -67,6 +67,7 @@ class OrderController extends Controller
             $orderdetail->product_id = $product['item_id'];
             $orderdetail->qty = $product['qty'];
             $orderdetail->price = $product['price'];
+            
             $orderdetail->vat = $request->vat;
 
             $orderdetail->uom_id = 1;
