@@ -84,6 +84,46 @@ CREATE TABLE status (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE `payment_statuses` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(50) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(50),
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE purchase_statuses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO purchase_statuses (name) VALUES
+('Pending'),
+('Approved'),
+('Rejected'),
+('Completed'),
+('Cancelled');
+
+
+INSERT INTO order_status (status_name, description) VALUES
+('Pending', 'Order has been placed but not processed yet'),
+('Processing', 'Order is being prepared'),
+('Shipped', 'Order has been shipped to the customer'),
+('Delivered', 'Order has been delivered successfully'),
+('Cancelled', 'Order has been cancelled by the customer or seller'),
+('Refunded', 'Order has been refunded to the customer');
+
+
+
 -- Warehouse Table
 CREATE TABLE warehouse (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -202,6 +242,36 @@ CREATE TABLE purchases_details (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Purchase Returns Table
+CREATE TABLE purchase_returns (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    purchases_id INT NOT NULL,
+    supplier_id INT DEFAULT NULL,
+    purchase_status_id INT DEFAULT NULL,
+    order_total DOUBLE NOT NULL,
+    paid_amount DOUBLE DEFAULT NULL,
+    discount DOUBLE DEFAULT NULL,
+    vat DOUBLE DEFAULT NULL,
+    date DATE DEFAULT NULL,
+    shipping_address VARCHAR(150),
+    description VARCHAR(150),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Purchase Return Details Table
+CREATE TABLE purchase_return_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    purchase_return_id INT NOT NULL,
+    product_id INT NOT NULL,
+    qty DOUBLE NOT NULL,
+    price DOUBLE NOT NULL,
+    discount DOUBLE DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
 -- Stock Table
 CREATE TABLE stocks (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -233,6 +303,7 @@ CREATE TABLE stock_adjustment (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 -- Stock Adjustment Details Table
 CREATE TABLE stock_adjustment_details (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -245,4 +316,5 @@ CREATE TABLE stock_adjustment_details (
 );
 
 
--- probot create-laravel-mvc -t customers -d laravel_pos
+-- probot create-laravel-mvc -t purchase_return_details -d laravel_pos
+-- php artisan make:controller purchase_return_Controller --resource

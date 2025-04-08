@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="invoice-address mb-4">
-                                    <h6 class="fw-bold mb-2 text-primary">Invoice From:</h6>
+                                    <h6 class="fw-bold mb-2 text-primary">Order Invoice From:</h6>
                                     <ul class="list-unstyled">
                                         <li>Laravel POS</li>
                                         <li>Dhaka, Bangladesh</li>
@@ -106,8 +106,8 @@
 
                         <!-- Buttons Section -->
                         <div class="d-flex justify-content-end mt-4">
-                            <a class="btn btn-success me-2 btn_process">Process</a>
-                            {{-- <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a> --}}
+                            {{-- <a class="btn btn-success me-2 btn_process">Process</a> --}}
+                            <a class="btn btn-success me-2 btn_process" href="{{ url('orders') }}">Process</a>
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
 
                 // Send the order data via AJAX
                 $.ajax({
-                    url: "{{ url('api/orders') }}",
+                    url: "{{ url('api/ordersLaravel') }}",
                     type: 'Post',
                     data: {
                         customer_id: customer_id,
@@ -310,6 +310,7 @@
                     error: function(xhr, status, error) {
                         console.log(error);
                     }
+
                 });
             });
 
@@ -318,4 +319,3 @@
 
     <script src="{{ asset('assets/js/cart.js') }}"></script>
 @endsection
-

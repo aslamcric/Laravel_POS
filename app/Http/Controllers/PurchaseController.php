@@ -6,9 +6,15 @@
 * Date: 2/19/2025 11:58:04 AM
 * Contact: towhid1@outlook.com
 */
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchasesDetail;
+use App\Models\Statu;
 use App\Models\Supplier;
 use App\Models\Status;
 
@@ -16,84 +22,100 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
-class PurchaseController extends Controller{
-	public function index(){
-		$purchases = Purchase::paginate(10);
-		return view("pages.erp.purchase.index",["purchases"=>$purchases]);
-	}
-	public function create(){
-		return view("pages.erp.purchase.create",["suppliers"=>Supplier::all(),"status"=>Status::all()]);
-	}
-	public function store(Request $request){
-		//Purchase::create($request->all());
-		$purchase = new Purchase;
-		$purchase->supplier_id=$request->supplier_id;
-		$purchase->status_id=$request->status_id;
-		$purchase->order_total=$request->order_total;
-		$purchase->paid_amount=$request->paid_amount;
-		$purchase->discount=$request->discount;
-		$purchase->vat=$request->vat;
-		if(isset($request->photo)){
-			$purchase->photo=$request->photo;
-		}
-		$purchase->date=$request->date;
-		$purchase->shipping_address=$request->shipping_address;
-		$purchase->description=$request->description;
-date_default_timezone_set("Asia/Dhaka");
-		$purchase->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$purchase->updated_at=date('Y-m-d H:i:s');
 
-		$purchase->save();
-		if(isset($request->photo)){
-			$imageName=$purchase->id.'.'.$request->photo->extension();
-			$purchase->photo=$imageName;
-			$purchase->update();
-			$request->photo->move(public_path('img'),$imageName);
-		}
+class PurchaseController extends Controller
+{
+    public function index()
+    {
+        $purchases = Purchase::paginate(10);
+        return view("pages.erp.purchase.index", ["purchases" => $purchases]);
+    }
+    public function create()
+    {
+        return view("pages.erp.purchase.create", ["suppliers" => Supplier::all(), "status" => Statu::all(), "products" => Product::all()]);
+    }
+    public function store(Request $request)
+    {
+        //Purchase::create($request->all());
+        $purchase = new Purchase;
+        $purchase->supplier_id = $request->supplier_id;
+        $purchase->status_id = $request->status_id;
+        $purchase->order_total = $request->order_total;
+        $purchase->paid_amount = $request->paid_amount;
+        $purchase->discount = $request->discount;
+        $purchase->vat = $request->vat;
+        if (isset($request->photo)) {
+            $purchase->photo = $request->photo;
+        }
+        $purchase->date = $request->date;
+        $purchase->shipping_address = $request->shipping_address;
+        $purchase->description = $request->description;
+        date_default_timezone_set("Asia/Dhaka");
+        $purchase->created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Dhaka");
+        $purchase->updated_at = date('Y-m-d H:i:s');
 
-		return back()->with('success', 'Created Successfully.');
-	}
-	public function show($id){
-		$purchase = Purchase::find($id);
-		return view("pages.erp.purchase.show",["purchase"=>$purchase]);
-	}
-	public function edit(Purchase $purchase){
-		return view("pages.erp.purchase.edit",["purchase"=>$purchase,"suppliers"=>Supplier::all(),"status"=>Status::all()]);
-	}
-	public function update(Request $request,Purchase $purchase){
-		//Purchase::update($request->all());
-		$purchase = Purchase::find($purchase->id);
-		$purchase->supplier_id=$request->supplier_id;
-		$purchase->status_id=$request->status_id;
-		$purchase->order_total=$request->order_total;
-		$purchase->paid_amount=$request->paid_amount;
-		$purchase->discount=$request->discount;
-		$purchase->vat=$request->vat;
-		if(isset($request->photo)){
-			$purchase->photo=$request->photo;
-		}
-		$purchase->date=$request->date;
-		$purchase->shipping_address=$request->shipping_address;
-		$purchase->description=$request->description;
-date_default_timezone_set("Asia/Dhaka");
-		$purchase->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$purchase->updated_at=date('Y-m-d H:i:s');
+        $purchase->save();
+        if (isset($request->photo)) {
+            $imageName = $purchase->id . '.' . $request->photo->extension();
+            $purchase->photo = $imageName;
+            $purchase->update();
+            $request->photo->move(public_path('img'), $imageName);
+        }
 
-		$purchase->save();
-		if(isset($request->photo)){
-			$imageName=$purchase->id.'.'.$request->photo->extension();
-			$purchase->photo=$imageName;
-			$purchase->update();
-			$request->photo->move(public_path('img'),$imageName);
-		}
+        return back()->with('success', 'Created Successfully.');
+    }
+    public function show($id)
+    {
+        $purchase = Purchase::find($id);
+        // $purchasedetails = PurchasesDetail::all();
+        $purchasedetails = PurchasesDetail::where ('purchases_id', $purchase->id)->get();
+        return view("pages.erp.purchase.show", ["purchase" => $purchase, "purchasedetails" => $purchasedetails]);
+    }
+    public function edit(Purchase $purchase)
+    {
+        return view("pages.erp.purchase.edit", ["purchase" => $purchase, "suppliers" => Supplier::all(), "status" => Statu::all()]);
+    }
+    public function update(Request $request, Purchase $purchase)
+    {
+        //Purchase::update($request->all());
+        $purchase = Purchase::find($purchase->id);
+        $purchase->supplier_id = $request->supplier_id;
+        $purchase->status_id = $request->status_id;
+        $purchase->order_total = $request->order_total;
+        $purchase->paid_amount = $request->paid_amount;
+        $purchase->discount = $request->discount;
+        $purchase->vat = $request->vat;
+        if (isset($request->photo)) {
+            $purchase->photo = $request->photo;
+        }
+        $purchase->date = $request->date;
+        $purchase->shipping_address = $request->shipping_address;
+        $purchase->description = $request->description;
+        date_default_timezone_set("Asia/Dhaka");
+        $purchase->created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Dhaka");
+        $purchase->updated_at = date('Y-m-d H:i:s');
 
-		return redirect()->route("purchases.index")->with('success','Updated Successfully.');
-	}
-	public function destroy(Purchase $purchase){
-		$purchase->delete();
-		return redirect()->route("purchases.index")->with('success', 'Deleted Successfully.');
-	}
+        $purchase->save();
+        if (isset($request->photo)) {
+            $imageName = $purchase->id . '.' . $request->photo->extension();
+            $purchase->photo = $imageName;
+            $purchase->update();
+            $request->photo->move(public_path('img'), $imageName);
+        }
+
+        return redirect()->route("purchases.index")->with('success', 'Updated Successfully.');
+    }
+    public function destroy(Purchase $purchase)
+    {
+        $purchase->delete();
+        return redirect()->route("purchases.index")->with('success', 'Deleted Successfully.');
+    }
+
+    public function find_supplier(Request $request)
+    {
+        $supplier = Supplier::find($request->id);
+        return response()->json(['supplier' => $supplier]);
+    }
 }
-?>

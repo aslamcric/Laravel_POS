@@ -9,6 +9,12 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class Stock extends Model{
+    protected $table="stocks";
+    protected $fillable =['product_id', 'transaction_type_id', 'warehouse_id', 'qty', 'uom_id', 'remark'];
+
+    public function products(){
+        return  $this->belongsTo(Product::class, 'product_id');
+    }
 
 
 }

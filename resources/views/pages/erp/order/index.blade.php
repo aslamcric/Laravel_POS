@@ -25,13 +25,13 @@
                 <th>Customer Id</th>
                 <th>Order Total</th>
                 <th>Discount</th>
-                <th>Shipping Address</th>
+                {{-- <th>Shipping Address</th> --}}
                 <th>Paid Amount</th>
-                <th>Status Id</th>
+                <th>Status</th>
                 <th>Order Date</th>
                 <th>Delivery Date</th>
                 <th>Vat</th>
-                <th>Remark</th>
+                {{-- <th>Remark</th> --}}
 
                 <th>Action</th>
             </tr>
@@ -40,16 +40,17 @@
             @foreach ($orders as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->customer_id }}</td>
+                    {{-- <td>{{ $order->customer_id }}</td> --}}
+                    <td>{{ optional($order->customers)->name }}</td>
                     <td>{{ $order->order_total }}</td>
                     <td>{{ $order->discount }}</td>
-                    <td>{{ $order->shipping_address }}</td>
+                    {{-- <td>{{ optional($order->customers)->address }}</td> --}}
                     <td>{{ $order->paid_amount }}</td>
-                    <td>{{ $order->status_id }}</td>
+                    <td>{{ optional ($order->orter_status)->name }}</td>
                     <td>{{ $order->order_date }}</td>
                     <td>{{ $order->delivery_date }}</td>
                     <td>{{ $order->vat }}</td>
-                    <td>{{ $order->remark }}</td>
+                    {{-- <td>{{ $order->remark }}</td> --}}
 
                     <td>
                         <form action = "{{ route('orders.destroy', $order->id) }}" method = "post">

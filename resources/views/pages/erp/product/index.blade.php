@@ -14,7 +14,7 @@
 
 @endsection
 @section('page')
-<a href="{{route('products.create')}}">New Product</a>
+<a class="btn btn-success" href="{{route('products.create')}}">New Product</a>
 <table class="table table-hover text-nowrap">
 	<thead>
 		<tr>
@@ -23,13 +23,13 @@
 			<th>Photo</th>
 			<th>Price</th>
 			<th>Offer Price</th>
-			<th>Category Id</th>
-			<th>Uom Id</th>
-			<th>Barcode</th>
-			<th>Sku</th>
-			<th>Manufacturer Id</th>
-			<th>Description</th>
-			<th>Weight</th>
+			<th>Category</th>
+			{{-- <th>Uom Id</th> --}}
+			{{-- <th>Barcode</th> --}}
+			{{-- <th>Sku</th> --}}
+			{{-- <th>Manufacturer Id</th> --}}
+			{{-- <th>Description</th> --}}
+			{{-- <th>Weight</th> --}}
 			<th>Size</th>
 
 			<th>Action</th>
@@ -43,13 +43,13 @@
 			<td><img src="{{asset('img/'.$product->photo)}}" width="100" /></td>
 			<td>{{$product->price}}</td>
 			<td>{{$product->offer_price}}</td>
-			<td>{{$product->category_id}}</td>
-			<td>{{$product->uom_id}}</td>
-			<td>{{$product->barcode}}</td>
-			<td>{{$product->sku}}</td>
-			<td>{{$product->manufacturer_id}}</td>
-			<td>{{$product->description}}</td>
-			<td>{{$product->weight}}</td>
+			<td>{{optional ($product->categories)->name}}</td>
+			{{-- <td>{{$product->uom_id}}</td> --}}
+			{{-- <td>{{$product->barcode}}</td> --}}
+			{{-- <td>{{$product->sku}}</td> --}}
+			{{-- <td>{{$product->manufacturer_id}}</td> --}}
+			{{-- <td>{{$product->description}}</td> --}}
+			{{-- <td>{{$product->weight}}</td> --}}
 			<td>{{$product->size}}</td>
 
 			<td>
@@ -65,6 +65,10 @@
 	@endforeach
 	</tbody>
 </table>
+
+<div class="d-flex justify-content-end mt-5">
+    {!! $products->links('pagination::bootstrap-5') !!}
+</div>
 @endsection
 @section('script')
 

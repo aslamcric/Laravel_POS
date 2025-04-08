@@ -6,7 +6,9 @@
 * Date: 2/19/2025 9:26:39 AM
 * Contact: towhid1@outlook.com
 */
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 
@@ -14,74 +16,99 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
-class CustomerController extends Controller{
-	public function index(){
-		$customers = Customer::paginate(10);
-		return view("pages.erp.customer.index",["customers"=>$customers]);
-	}
-	public function create(){
-		return view("pages.erp.customer.create",[]);
-	}
-	public function store(Request $request){
-		//Customer::create($request->all());
-		$customer = new Customer;
-		$customer->name=$request->name;
-		if(isset($request->photo)){
-			$customer->photo=$request->photo;
-		}
-		$customer->phone=$request->phone;
-		$customer->email=$request->email;
-		$customer->address=$request->address;
-date_default_timezone_set("Asia/Dhaka");
-		$customer->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$customer->updated_at=date('Y-m-d H:i:s');
 
-		$customer->save();
-		if(isset($request->photo)){
-			$imageName=$customer->id.'.'.$request->photo->extension();
-			$customer->photo=$imageName;
-			$customer->update();
-			$request->photo->move(public_path('img'),$imageName);
-		}
+class CustomerController extends Controller
+{
+    public function index()
+    {
+        $customers = Customer::paginate(10);
+        return view("pages.erp.customer.index", ["customers" => $customers]);
+    }
+    public function create()
+    {
+        return view("pages.erp.customer.create", []);
+    }
 
-		return back()->with('success', 'Created Successfully.');
-	}
-	public function show($id){
-		$customer = Customer::find($id);
-		return view("pages.erp.customer.show",["customer"=>$customer]);
-	}
-	public function edit(Customer $customer){
-		return view("pages.erp.customer.edit",["customer"=>$customer,]);
-	}
-	public function update(Request $request,Customer $customer){
-		//Customer::update($request->all());
-		$customer = Customer::find($customer->id);
-		$customer->name=$request->name;
-		if(isset($request->photo)){
-			$customer->photo=$request->photo;
-		}
-		$customer->phone=$request->phone;
-		$customer->email=$request->email;
-		$customer->address=$request->address;
-date_default_timezone_set("Asia/Dhaka");
-		$customer->created_at=date('Y-m-d H:i:s');
-date_default_timezone_set("Asia/Dhaka");
-		$customer->updated_at=date('Y-m-d H:i:s');
 
-		$customer->save();
-		if(isset($request->photo)){
-			$imageName=$customer->id.'.'.$request->photo->extension();
-			$customer->photo=$imageName;
-			$customer->update();
-			$request->photo->move(public_path('img'),$imageName);
-		}
+    public function store(Request $request)
+    {
+        $customer = new Customer;
 
-		return redirect()->route("customers.index")->with('success','Updated Successfully.');
-	}
-	public function destroy(Customer $customer){
-		$customer->delete();
-		return redirect()->route("customers.index")->with('success', 'Deleted Successfully.');
-	}
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+
+        date_default_timezone_set("Asia/Dhaka");
+        $customer->created_at = date('Y-m-d H:i:s');
+        $customer->updated_at = date('Y-m-d H:i:s');
+
+        $customer->save();
+
+        // Don't process photo if not sent — and you skipped it in the Vue code
+
+        return response()->json(['success' => true, 'message' => 'Customer created successfully.'], 201);
+    }
+
+
+
+    public function show($id)
+    {
+        $customer = Customer::find($id);
+        return view("pages.erp.customer.show", ["customer" => $customer]);
+    }
+    public function edit(Customer $customer)
+    {
+        return view("pages.erp.customer.edit", ["customer" => $customer,]);
+    }
+
+    public function update(Request $request, Customer $customer)
+    {
+        // Validate the input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'address' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Ensure proper file validation
+        ]);
+
+        // Update the customer details
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+
+        // If there's a new photo, process it
+        if ($request->hasFile('photo')) {
+            // Delete the old photo if exists
+            if ($customer->photo && file_exists(public_path('img/' . $customer->photo))) {
+                unlink(public_path('img/' . $customer->photo));
+            }
+
+            // Store the new photo
+            $photo = $request->file('photo');
+            $photoName = $customer->id . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('img'), $photoName);  // Save the photo to the public/img folder
+
+            // Save the new photo name in the database
+            $customer->photo = $photoName;
+        }
+
+        // Update the updated_at timestamp
+        $customer->updated_at = now();
+
+        // Save the updated customer data
+        $customer->save();
+
+        // Redirect with success message
+        return redirect()->route("customers.index")->with('success', 'Updated Successfully.');
+    }
+
+
+    public function destroy(Customer $customer)
+    {
+        $customer->delete();
+        return redirect()->route("customers.index")->with('success', 'Deleted Successfully.');
+    }
 }
-?>

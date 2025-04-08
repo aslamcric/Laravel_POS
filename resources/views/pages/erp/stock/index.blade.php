@@ -14,33 +14,34 @@
 
 @endsection
 @section('page')
-<a href="{{route('stocks.create')}}">New Stock</a>
+{{-- <a href="{{route('stocks.create')}}">New Stock</a> --}}
+<h1>Stock of Products</h1>
 <table class="table table-hover text-nowrap">
 	<thead>
 		<tr>
 			<th>Id</th>
 			<th>Product Id</th>
-			<th>Transaction Type Id</th>
-			<th>Warehouse Id</th>
+			{{-- <th>Transaction Type Id</th>
+			<th>Warehouse Id</th> --}}
 			<th>Qty</th>
-			<th>Uom Id</th>
-			<th>Remark</th>
+			{{-- <th>Uom Id</th>
+			<th>Remark</th> --}}
 
-			<th>Action</th>
+			{{-- <th>Action</th> --}}
 		</tr>
 	</thead>
 	<tbody>
 	@foreach($stocks as $stock)
 		<tr>
 			<td>{{$stock->id}}</td>
-			<td>{{$stock->product_id}}</td>
-			<td>{{$stock->transaction_type_id}}</td>
-			<td>{{$stock->warehouse_id}}</td>
+			<td>{{$stock->name}}</td>
+			{{-- <td>{{$stock->transaction_type_id}}</td>
+			<td>{{$stock->warehouse_id}}</td> --}}
 			<td>{{$stock->qty}}</td>
-			<td>{{$stock->uom_id}}</td>
-			<td>{{$stock->remark}}</td>
+			{{-- <td>{{$stock->uom_id}}</td>
+			<td>{{$stock->remark}}</td> --}}
 
-			<td>
+			{{-- <td>
 			<form action = "{{route('stocks.destroy',$stock->id)}}" method = "post">
 				<a class= 'btn btn-primary' href = "{{route('stocks.show',$stock->id)}}">View</a>
 				<a class= 'btn btn-success' href = "{{route('stocks.edit',$stock->id)}}"> Edit </a>
@@ -48,11 +49,14 @@
 				@csrf
 				<input type = "submit" class="btn btn-danger" name = "delete" value = "Delete" />
 			</form>
-			</td>
+			</td> --}}
 		</tr>
 	@endforeach
 	</tbody>
 </table>
+<div class="d-flex justify-content-end mt-5">
+    {!! $stocks->links('pagination::bootstrap-5') !!}
+</div>
 @endsection
 @section('script')
 

@@ -1,6 +1,23 @@
 @extends('layout.erp.app')
 
 @section('page')
+
+@php
+  $total_orders =  DB::select('SELECT sum(order_total) total FROM orders');
+  $total_orders_paid =  DB::select('SELECT sum(paid_amount) total FROM orders');
+  $total_orders_no =  DB::select('SELECT count(*) as total FROM orders');
+
+  $total_purchsase =  DB::select('SELECT sum(order_total) total FROM purchases');
+  $total_purchsase_paid =  DB::select('SELECT sum(paid_amount) total FROM purchases');
+  $total_purchsase_no =  DB::select('SELECT count(*) as total FROM purchases');
+
+
+  $total_customers = DB::select('SELECT COUNT(*) AS total_customers FROM customers');
+  $total_suppliers = DB::select('SELECT  COUNT(*) AS total_suppliers FROM suppliers');
+
+//   print_r($total_orders_no[0]->total);
+
+@endphp
 <div class="row">
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-widget w-100">
@@ -12,10 +29,9 @@
             <div class="dash-widgetcontent">
                 <h5>
                     $<span
-                        class="counters"
-                        data-count="307144.00">$307,144.00</span>
+                        class="counters">{{$total_purchsase[0]->total}}</span>
                 </h5>
-                <h6>Total Purchase Due</h6>
+                <h6>Total Purchase</h6>
             </div>
         </div>
     </div>
@@ -29,10 +45,9 @@
             <div class="dash-widgetcontent">
                 <h5>
                     $<span
-                        class="counters"
-                        data-count="4385.00">$4,385.00</span>
+                        class="counters">{{$total_orders[0]->total}}</span>
                 </h5>
-                <h6>Total Sales Due</h6>
+                <h6>Total Sale</h6>
             </div>
         </div>
     </div>
@@ -46,10 +61,9 @@
             <div class="dash-widgetcontent">
                 <h5>
                     $<span
-                        class="counters"
-                        data-count="385656.50">$385,656.50</span>
+                        class="counters">{{$total_orders_paid[0]->total}}</span>
                 </h5>
-                <h6>Total Sale Amount</h6>
+                <h6>Total Sale Paid</h6>
             </div>
         </div>
     </div>
@@ -63,8 +77,7 @@
             <div class="dash-widgetcontent">
                 <h5>
                     $<span
-                        class="counters"
-                        data-count="40000.00">$400.00</span>
+                        class="counters">{{$total_purchsase_paid[0]->total}}</span>
                 </h5>
                 <h6>Total Expense Amount</h6>
             </div>
@@ -73,7 +86,7 @@
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-count">
             <div class="dash-counts">
-                <h4>100</h4>
+                <h4>{{$total_customers[0]->total_customers}}</h4>
                 <h5>Customers</h5>
             </div>
             <div class="dash-imgs">
@@ -84,7 +97,7 @@
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-count das1">
             <div class="dash-counts">
-                <h4>110</h4>
+                <h4>{{$total_suppliers[0]->total_suppliers}}</h4>
                 <h5>Suppliers</h5>
             </div>
             <div class="dash-imgs">
@@ -95,8 +108,8 @@
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-count das2">
             <div class="dash-counts">
-                <h4>150</h4>
-                <h5>Purchase Invoice</h5>
+                <h4>{{$total_purchsase_no[0]->total}}</h4>
+                <h5>Purchase</h5>
             </div>
             <div class="dash-imgs">
                 <img
@@ -109,8 +122,8 @@
     <div class="col-xl-3 col-sm-6 col-12 d-flex">
         <div class="dash-count das3">
             <div class="dash-counts">
-                <h4>170</h4>
-                <h5>Sales Invoice</h5>
+                <h4>{{$total_orders_no[0]->total}}</h4>
+                <h5>Sales</h5>
             </div>
             <div class="dash-imgs">
                 <i data-feather="file"></i>
@@ -120,7 +133,7 @@
 </div>
 <!-- Button trigger modal -->
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-xl-7 col-sm-12 col-12 d-flex">
         <div class="card flex-fill">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -494,6 +507,6 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 

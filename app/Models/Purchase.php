@@ -10,6 +10,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class Purchase extends Model{
 
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function products() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function payment_status() {
+        return $this->belongsTo(PaymentStatuse::class, 'status_id');
+    }
 
 }
 ?>
