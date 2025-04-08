@@ -8,6 +8,7 @@ use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
 use App\Http\Controllers\api\vue\ProductController;
 use App\Http\Controllers\api\vue\SupplierController;
+use App\Http\Controllers\api\vue\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +47,4 @@ Route::apiResource('customers', CustomerController::class);
 Route::apiResource('suppliers', SupplierController::class);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);
+Route::apiResource('users', UserController::class);
