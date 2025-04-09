@@ -11,19 +11,14 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        try {
-            $categories = Category::all();
+        $query = Category::query();
 
-            if (!$categories) {
-                $categories = "Data Not Found";
-            }
-
-            return response()->json(['categories' => $categories]);
-        } catch (\Throwable $th) {
-            return response()->json(["error" => $th->getMessage()]);
+        if ($request->search) {
+            $query->where('name', 'like', "%{$request->search}%");
         }
+        return response()->json($query->paginate(3));
     }
 
     /**
@@ -31,7 +26,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $category = new Category;
+            $category->name = $request->name;
+            $category->description = $request->description;
+            $category->save();
+
+            return response()->json(["category" => $category]);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
+        }
     }
 
     /**
@@ -39,7 +43,17 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $category = Category::find($id);
+
+            if (!$category) {
+                $category = "Data Not Found";
+            }
+
+            return response()->json(['category' => $category]);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
+        }
     }
 
     /**
@@ -47,7 +61,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $category = Category::find($id);
+
+            if (!$category) {
+                $category = "Data Not Found";
+            }
+            $category->name = $request->name;
+            $category->description = $request->description;
+            $category->save();
+
+            return response()->json(['category' => $category]);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
+        }
     }
 
     /**
@@ -55,6 +82,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $categories = Category::destroy($id);
+            return response()->json(["categories" => $categories]);
+        } catch (\Throwable $th) {
+            return response()->json(["categories" => $th]);
+        }
     }
 }
