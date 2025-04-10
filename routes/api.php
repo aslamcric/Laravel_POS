@@ -47,4 +47,5 @@ Route::apiResource('customers', CustomerController::class);
 Route::apiResource('suppliers', SupplierController::class);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);
+Route::get('dropCategory', [CategoryController::class, 'dropCategory']);
 Route::apiResource('users', UserController::class);

@@ -20,6 +20,12 @@ class CategoryController extends Controller
         }
         return response()->json($query->paginate(3));
     }
+    public function dropCategory(Request $request)
+    {
+        $query = Category::all();
+
+        return response()->json($query);
+    }
 
     /**
      * Store a newly created resource in storage.

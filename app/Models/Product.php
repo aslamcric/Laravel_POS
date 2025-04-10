@@ -6,12 +6,15 @@
 * Date: 2/19/2025 11:56:53 AM
 * Contact: towhid1@outlook.com
 */
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
-class Product extends Model{
-    public function categories(){
+
+class Product extends Model
+{
+    public function categories()
+    {
         return  $this->belongsTo(Category::class, 'category_id');
     }
-
 }
-?>
