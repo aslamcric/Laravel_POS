@@ -22,7 +22,7 @@ class ProductController extends Controller
             $query->where('name', 'like', "%{$request->search}%");
         }
 
-        return response()->json($query->paginate(3));
+        return response()->json($query->paginate(5));
     }
 
 
@@ -121,7 +121,7 @@ class ProductController extends Controller
             $product->save();
 
             if (isset($request->photo)) {
-                $imageName = $product->id . '.' . $request->photo->extension();
+                $imageName = $product->id . rand(5,100). '.' . $request->photo->extension();
                 $product->photo = $imageName;
                 $product->update();
                 $request->photo->move(public_path('img'), $imageName);
