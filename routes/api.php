@@ -4,6 +4,7 @@ use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\PurchaReturnController;
 use App\Http\Controllers\api\PurchaseReturnController;
 use App\Http\Controllers\api\purchasesController;
+use App\Http\Controllers\api\vue\AuthController;
 use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
 use App\Http\Controllers\api\vue\ProductController;
@@ -49,3 +50,14 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::get('dropCategory', [CategoryController::class, 'dropCategory']);
 Route::apiResource('users', UserController::class);
+
+// login
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('refresh', [AuthController::class, 'refresh']);
+Route::post('logout', [AuthController::class, 'logout']);
+
+
+
+// https://stackoverflow.com/questions/54721576/laravel-route-apiresource-difference-between-apiresource-and-resource-in-route
+// https://jurin.medium.com/securing-laravel-10-api-using-jwt-a5b6dca58fd7
