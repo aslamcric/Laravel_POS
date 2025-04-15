@@ -5,29 +5,29 @@ namespace App\Http\Controllers\api\vue;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         try {
-            $query = Customer::query();
+            $customers = Customer::all();
 
-            if ($request->search) {
-                $query->where('name', 'like', "%{$request->search}%")
-                    ->orWhere('email', 'like', "%{$request->search}%");
+            if (!$customers) {
+                $customers = "Data Not Found";
             }
-
-            $customers = $query->paginate(5);
 
             return response()->json(['customers' => $customers]);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()]);
+            return response()->json(["error" => $th->getMessage()]);
         }
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,29 +35,21 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         try {
-            $customer = new Customer;
+            $customer = new Customer();
 
             $customer->name = $request->name;
             $customer->phone = $request->phone;
             $customer->email = $request->email;
             $customer->address = $request->address;
 
-            if (isset($request->photo)) {
-                $customer->photo = $request->photo;
-            }
+            // $customer->photo = $request->photo;
 
-            date_default_timezone_set("Asia/Dhaka");
-            $customer->created_at = date('Y-m-d H:i:s');
-            $customer->updated_at = date('Y-m-d H:i:s');
+            // date_default_timezone_set("Asia/Dhaka");
+            // $customer->created_at = date('Y-m-d H:i:s');
+            // date_default_timezone_set("Asia/Dhaka");
+            // $customer->updated_at = date('Y-m-d H:i:s');
 
             $customer->save();
-
-            if (isset($request->photo)) {
-                $imageName = $customer->id . '.' . $request->photo->extension();
-                $customer->photo = $imageName;
-                $customer->update();
-                $request->photo->move(public_path('img'), $imageName);
-            }
 
             return response()->json(["customer" => $customer]);
         } catch (\Throwable $th) {
@@ -74,10 +66,10 @@ class CustomerController extends Controller
             $customer = Customer::find($id);
 
             if (!$customer) {
-                return response()->json(["message" => "Customer not found"], 404);
+                $customer = "Data Not Found";
             }
 
-            return response()->json(["customer" => $customer]);
+            return response()->json(['customer' => $customer]);
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()]);
         }
@@ -92,25 +84,16 @@ class CustomerController extends Controller
             $customer = Customer::find($id);
 
             if (!$customer) {
-                return response()->json(["message" => "Customer not found"], 404);
+                return response()->json(["message" => "Customer not Found"]);
             }
 
             $customer->name = $request->name;
             $customer->phone = $request->phone;
             $customer->email = $request->email;
             $customer->address = $request->address;
-
-            date_default_timezone_set("Asia/Dhaka");
-            $customer->updated_at = date('Y-m-d H:i:s');
+            $customer->photo = $request->photo;
 
             $customer->save();
-
-            if (isset($request->photo)) {
-                $imageName = $customer->id . rand(5, 100) . '.' . $request->photo->extension();
-                $customer->photo = $imageName;
-                $customer->update();
-                $request->photo->move(public_path('img'), $imageName);
-            }
 
             return response()->json(["customer" => $customer]);
         } catch (\Throwable $th) {
@@ -118,16 +101,17 @@ class CustomerController extends Controller
         }
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         try {
-            $deleted = Customer::destroy($id);
-            return response()->json(["deleted" => $deleted]);
+            $customers = Customer::destroy($id);
+            return response()->json(["customers" => $customers]);
         } catch (\Throwable $th) {
-            return response()->json(["error" => $th->getMessage()]);
+            return response()->json(["customers" => $th]);
         }
     }
 }
