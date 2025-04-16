@@ -7,6 +7,7 @@ use App\Http\Controllers\api\purchasesController;
 use App\Http\Controllers\api\vue\AuthController;
 use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
+use App\Http\Controllers\api\vue\OrderReportController;
 use App\Http\Controllers\api\vue\ProductController;
 use App\Http\Controllers\api\vue\SupplierController;
 use App\Http\Controllers\api\vue\UserController;
@@ -56,6 +57,10 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('refresh', [AuthController::class, 'refresh']);
 Route::post('logout', [AuthController::class, 'logout']);
+
+// Report
+Route::get('/orderReport/data', [OrderReportController::class, 'index']);
+Route::post('/orderReport', [OrderReportController::class, 'orderReport']);
 
 
 
