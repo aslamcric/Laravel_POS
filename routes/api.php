@@ -9,6 +9,7 @@ use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
 use App\Http\Controllers\api\vue\OrderReportController;
 use App\Http\Controllers\api\vue\ProductController;
+use App\Http\Controllers\api\vue\PurchaseReportController;
 use App\Http\Controllers\api\vue\SupplierController;
 use App\Http\Controllers\api\vue\UserController;
 use Illuminate\Http\Request;
@@ -61,6 +62,9 @@ Route::post('logout', [AuthController::class, 'logout']);
 // Report
 Route::get('/orderReport/data', [OrderReportController::class, 'index']);
 Route::post('/orderReport', [OrderReportController::class, 'orderReport']);
+
+Route::get('/purchaseReport/data', [PurchaseReportController::class, 'index']);
+Route::post('/purchaseReport', [PurchaseReportController::class, 'purchaseReport']);
 
 
 
