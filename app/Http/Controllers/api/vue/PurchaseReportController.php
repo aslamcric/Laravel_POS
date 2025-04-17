@@ -13,12 +13,12 @@ class PurchaseReportController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
-        // $paymentStatuses = PaymentStatuse::all();
+        $paymentStatuses = PaymentStatuse::all();
 
         return response()->json([
             'purchases' => [],
             'suppliers' => $suppliers,
-            // 'payment_statuses' => $paymentStatuses,
+            'payment_statuses' => $paymentStatuses,
         ]);
     }
 
@@ -67,7 +67,8 @@ class PurchaseReportController extends Controller
             'total_paid' => $totalPaid,
             'total_unpaid' => $totalUnpaid,
             'total_pending' => $totalPending,
+            'payment_statuses' => $paymentStatuses,
         ]);
     }
-    
+
 }

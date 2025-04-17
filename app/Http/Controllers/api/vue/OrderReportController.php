@@ -15,8 +15,6 @@ class OrderReportController extends Controller
     {
         $customers = Customer::all();
         $statuses = Statu::all();
-        // return view('pages.erp.order.report', ['orders' => [], 'customers' => $customers, 'statuses' => $statuses]);
-
         return response()->json([
             'customers' => $customers,
             'statuses' => $statuses,
@@ -44,12 +42,6 @@ class OrderReportController extends Controller
         if ($statusId) {
             $query->where('status_id', $statusId);
         }
-
-        // $orders = $query->orderBy('order_date', 'asc')->get();
-        // $customers = Customer::all();
-        // $statuses = Statu::all();
-
-        // return view('pages.erp.order.report', compact('orders', 'startDate', 'endDate', 'customers', 'customerId', 'statuses', 'statusId'));
 
         $orders = $query->orderBy('order_date', 'asc')->get();
         return response()->json([

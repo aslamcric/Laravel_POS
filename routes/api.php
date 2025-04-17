@@ -7,6 +7,7 @@ use App\Http\Controllers\api\purchasesController;
 use App\Http\Controllers\api\vue\AuthController;
 use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
+use App\Http\Controllers\api\vue\OrderController as VueOrderController;
 use App\Http\Controllers\api\vue\OrderReportController;
 use App\Http\Controllers\api\vue\ProductController;
 use App\Http\Controllers\api\vue\PurchaseReportController;
@@ -60,11 +61,15 @@ Route::post('refresh', [AuthController::class, 'refresh']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 // Report
-Route::get('/orderReport/data', [OrderReportController::class, 'index']);
-Route::post('/orderReport', [OrderReportController::class, 'orderReport']);
+Route::get('orderReport/data', [OrderReportController::class, 'index']);
+Route::post('orderReport', [OrderReportController::class, 'orderReport']);
+Route::get('purchaseReport/data', [PurchaseReportController::class, 'index']);
+Route::post('purchaseReport', [PurchaseReportController::class, 'purchaseReport']);
 
-Route::get('/purchaseReport/data', [PurchaseReportController::class, 'index']);
-Route::post('/purchaseReport', [PurchaseReportController::class, 'purchaseReport']);
+// Order
+Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
+Route::get('order/data', [VueOrderController::class, 'index']);
+Route::post('order', [VueOrderController::class, 'index']);
 
 
 
