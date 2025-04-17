@@ -10,7 +10,9 @@ use App\Http\Controllers\api\vue\CustomerController;
 use App\Http\Controllers\api\vue\OrderController as VueOrderController;
 use App\Http\Controllers\api\vue\OrderReportController;
 use App\Http\Controllers\api\vue\ProductController;
+use App\Http\Controllers\api\vue\PurchaseController;
 use App\Http\Controllers\api\vue\PurchaseReportController;
+use App\Http\Controllers\api\vue\StockController;
 use App\Http\Controllers\api\vue\SupplierController;
 use App\Http\Controllers\api\vue\UserController;
 use Illuminate\Http\Request;
@@ -70,6 +72,13 @@ Route::post('purchaseReport', [PurchaseReportController::class, 'purchaseReport'
 Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
 Route::get('order/data', [VueOrderController::class, 'index']);
 Route::post('order', [VueOrderController::class, 'index']);
+
+// Purchase
+Route::get('allOrderindex', [PurchaseController::class, 'allPurchaseindex']);
+
+// Stocks
+Route::get('/stocks', [StockController::class, 'apiIndex']);
+
 
 
 
