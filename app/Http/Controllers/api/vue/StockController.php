@@ -22,16 +22,16 @@ class StockController extends Controller
             ->select('p.id', 'p.name', DB::raw('SUM(s.qty) as qty'))
             ->join('products as p', 'p.id', '=', 's.product_id')
             ->groupBy('p.id', 'p.name');
-    
+
         // If search parameter exists
         if (request()->has('search') && request('search') != '') {
             $search = request('search');
             $query->where('p.name', 'like', "%{$search}%");
         }
-    
-        $stocks = $query->paginate(5)->withQueryString(); // Keep search term during pagination
-    
+
+        $stocks = $query->paginate(8)->withQueryString(); // Keep search term during pagination
+
         return response()->json($stocks);
     }
-    
+
 }

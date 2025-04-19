@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Statu;
-
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -27,100 +27,73 @@ class OrderController extends Controller
         return response()->json($query->paginate(5));
     }
 
+    public function index()
+    {
 
-    // public function index()
-    // {
-    //     $orders = Order::with(['customers'])->paginate(10);
-    //     return view("pages.erp.order.index", ["orders" => $orders]);
-    // }
-
-    // public function create()
-    // {
-    //     return view("pages.erp.order.create", ["customers" => Customer::all(), "status" => Statu::all(), "products" => Product::all()]);
-    // }
-
-
-    // public function store(Request $request)
-    // {
-    //     //Order::create($request->all());
-    //     $order = new Order;
-    //     $order->customer_id = $request->customer_id;
-    //     $order->order_total = $request->order_total;
-    //     $order->discount = $request->discount;
-    //     $order->shipping_address = $request->shipping_address;
-    //     $order->paid_amount = $request->paid_amount;
-    //     $order->status_id = $request->status_id;
-    //     $order->order_date = $request->order_date;
-    //     $order->delivery_date = $request->delivery_date;
-    //     $order->vat = $request->vat;
-    //     $order->remark = $request->remark;
-    //     date_default_timezone_set("Asia/Dhaka");
-    //     $order->created_at = date('Y-m-d H:i:s');
-    //     date_default_timezone_set("Asia/Dhaka");
-    //     $order->updated_at = date('Y-m-d H:i:s');
-
-    //     $order->save();
-
-    //     return back()->with('success', 'Created Successfully.');
-    // }
+        try {
+            $customers = Customer::all();
+            $products = Product::all();
+            return response()->json(compact('customers', 'products'));
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
+        }
+    }
 
 
-    // public function show($id)
-    // {
-    //     $order = Order::find($id);
-    //     $orderdetails = OrderDetail::where ('order_id', $order->id)->get();
-    //     return view("pages.erp.order.show", ["order" => $order, 'orderdetails'=>$orderdetails]);
-    // }
+    // Sir
+    public function process(Request $request)
+    {
+        // order table
+        try {
+            $order = new Order();
+            $order->customer_id = $request->customer['id'];
+            $order->order_date = now();
+            $order->delivery_date =  date('Y-m-d', strtotime('+7 days'));
+            $order->shipping_address = $request->customer['address'];
+            $order->order_total = $request->grandtotal;
+            $order->paid_amount = $request->grandtotal;
+            $order->remark = "";
+            $order->status_id = 1;
+            $order->discount = $request->discount;
+            $order->vat = 0;
+            date_default_timezone_set("Asia/Dhaka");
+            $order->created_at = date('Y-m-d H:i:s');
+            date_default_timezone_set("Asia/Dhaka");
+            $order->updated_at = date('Y-m-d H:i:s');
+            $order->save();
+            $last_id = $order->id;
 
+            foreach ($request->products as $key => $product) {
 
-    // public function edit(Order $order)
-    // {
-    //     return view("pages.erp.order.edit", ["order" => $order, "customers" => Customer::all(), "status" => Statu::all()]);
-    // }
+                $orderdetail = new OrderDetail();
+                $orderdetail->order_id = $last_id;
+                $orderdetail->product_id = $product['item_id'];
+                $orderdetail->qty = $product['qty'];
+                $orderdetail->price = $product['price'];
+                $orderdetail->vat = 0;
+                $orderdetail->discount = $product['discount'];
+                date_default_timezone_set("Asia/Dhaka");
+                $orderdetail->created_at = date('Y-m-d H:i:s');
+                date_default_timezone_set("Asia/Dhaka");
+                $orderdetail->updated_at = date('Y-m-d H:i:s');
+                $orderdetail->save();
 
+                $stock = new Stock();
+                $stock->product_id = $product['item_id'];
+                $stock->transaction_type_id = 2;
+                $stock->warehouse_id = 1;
+                $stock->qty = $product['qty'] * -1;
+                $stock->uom_id = 1;
+                $stock->remark = "Sales";
+                $stock->created_at = date('Y-m-d H:i:s');
+                $stock->updated_at = date('Y-m-d H:i:s');
+                $stock->save();
+            }
 
-    // public function update(Request $request, Order $order)
-    // {
-    //     //Order::update($request->all());
-    //     $order = Order::find($order->id);
-    //     $order->customer_id = $request->customer_id;
-    //     $order->order_total = $request->order_total;
-    //     $order->discount = $request->discount;
-    //     $order->shipping_address = $request->shipping_address;
-    //     $order->paid_amount = $request->paid_amount;
-    //     $order->status_id = $request->status_id;
-    //     $order->order_date = $request->order_date;
-    //     $order->delivery_date = $request->delivery_date;
-    //     $order->vat = $request->vat;
-    //     $order->remark = $request->remark;
-    //     date_default_timezone_set("Asia/Dhaka");
-    //     $order->created_at = date('Y-m-d H:i:s');
-    //     date_default_timezone_set("Asia/Dhaka");
-    //     $order->updated_at = date('Y-m-d H:i:s');
-
-    //     $order->save();
-
-    //     return redirect()->route("orders.index")->with('success', 'Updated Successfully.');
-    // }
-
-
-    // public function destroy(Order $order)
-    // {
-    //     $order->delete();
-    //     return redirect()->route("orders.index")->with('success', 'Deleted Successfully.');
-    // }
-
-
-
-    // public function find_customer(Request $request)
-    // {
-    //     $customer = Customer::find($request->id);
-    //     return response()->json(['customer' => $customer]);
-    // }
-
-    // public function find_product(Request $request)
-    // {
-    //     $product = Product::find($request->id);
-    //     return response()->json(['product' => $product]);
-    // }
+            $allData = $request->all();
+            return response()->json(["success" => $allData]);
+        } catch (\Throwable $th) {
+            return response()->json(["err" => $th->getMessage()]);
+        }
+    }
 }

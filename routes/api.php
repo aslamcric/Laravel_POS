@@ -71,10 +71,10 @@ Route::post('purchaseReport', [PurchaseReportController::class, 'purchaseReport'
 // Order
 Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
 Route::get('order/data', [VueOrderController::class, 'index']);
-Route::post('order', [VueOrderController::class, 'index']);
+Route::post('order/processOrder', [VueOrderController::class, 'process']);
 
 // Purchase
-Route::get('allOrderindex', [PurchaseController::class, 'allPurchaseindex']);
+Route::get('allPurchaseindex', [PurchaseController::class, 'allPurchaseindex']);
 
 // Stocks
 Route::get('/stocks', [StockController::class, 'apiIndex']);
