@@ -65,17 +65,20 @@ class PurchaseController extends Controller
 
         return back()->with('success', 'Created Successfully.');
     }
+
     public function show($id)
     {
         $purchase = Purchase::find($id);
         // $purchasedetails = PurchasesDetail::all();
-        $purchasedetails = PurchasesDetail::where ('purchases_id', $purchase->id)->get();
+        $purchasedetails = PurchasesDetail::where('purchases_id', $purchase->id)->get();
         return view("pages.erp.purchase.show", ["purchase" => $purchase, "purchasedetails" => $purchasedetails]);
     }
+
     public function edit(Purchase $purchase)
     {
         return view("pages.erp.purchase.edit", ["purchase" => $purchase, "suppliers" => Supplier::all(), "status" => Statu::all()]);
     }
+    
     public function update(Request $request, Purchase $purchase)
     {
         //Purchase::update($request->all());

@@ -73,6 +73,9 @@ Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
 Route::get('order/data', [VueOrderController::class, 'index']);
 Route::post('order/processOrder', [VueOrderController::class, 'process']);
 
+
+Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
+
 // Purchase
 Route::get('allPurchaseindex', [PurchaseController::class, 'allPurchaseindex']);
 

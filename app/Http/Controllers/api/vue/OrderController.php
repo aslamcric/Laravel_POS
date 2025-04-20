@@ -39,8 +39,6 @@ class OrderController extends Controller
         }
     }
 
-
-    // Sir
     public function process(Request $request)
     {
         // order table
@@ -94,6 +92,22 @@ class OrderController extends Controller
             return response()->json(["success" => $allData]);
         } catch (\Throwable $th) {
             return response()->json(["err" => $th->getMessage()]);
+        }
+    }
+
+
+    public function show($id)
+    {
+        // return response()->json(["abc" => $id]);
+        try {
+            $order = Order::with(['order_details', 'customers', 'order_details.products'])->where("id", $id)->get();
+
+
+           return response()->json([
+                'order' => $order,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
         }
     }
 }
