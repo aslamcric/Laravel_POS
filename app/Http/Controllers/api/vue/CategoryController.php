@@ -20,6 +20,7 @@ class CategoryController extends Controller
         }
         return response()->json($query->paginate(3));
     }
+    
     public function dropCategory(Request $request)
     {
         $query = Category::all();

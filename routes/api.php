@@ -8,9 +8,11 @@ use App\Http\Controllers\api\vue\AuthController;
 use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
 use App\Http\Controllers\api\vue\OrderController as VueOrderController;
+use App\Http\Controllers\api\vue\OrderDetailController;
 use App\Http\Controllers\api\vue\OrderReportController;
 use App\Http\Controllers\api\vue\ProductController;
 use App\Http\Controllers\api\vue\PurchaseController;
+use App\Http\Controllers\api\vue\PurchaseDetailController;
 use App\Http\Controllers\api\vue\PurchaseReportController;
 use App\Http\Controllers\api\vue\StockController;
 use App\Http\Controllers\api\vue\SupplierController;
@@ -72,6 +74,12 @@ Route::post('purchaseReport', [PurchaseReportController::class, 'purchaseReport'
 Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
 Route::get('order/data', [VueOrderController::class, 'index']);
 Route::post('order/processOrder', [VueOrderController::class, 'process']);
+
+// Order Detail
+Route::apiResource('orderDetail', OrderDetailController::class);
+
+// Purchase Detail
+Route::apiResource('purchaseDetail', PurchaseDetailController::class);
 
 
 Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
