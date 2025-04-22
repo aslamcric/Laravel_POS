@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\PurchaReturnController;
 use App\Http\Controllers\api\PurchaseReturnController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\api\purchasesController;
 use App\Http\Controllers\api\vue\AuthController;
 use App\Http\Controllers\api\vue\CategoryController;
 use App\Http\Controllers\api\vue\CustomerController;
+use App\Http\Controllers\api\vue\DashboardController as VueDashboardController;
 use App\Http\Controllers\api\vue\OrderController as VueOrderController;
 use App\Http\Controllers\api\vue\OrderDetailController;
 use App\Http\Controllers\api\vue\OrderReportController;
@@ -74,21 +76,27 @@ Route::post('purchaseReport', [PurchaseReportController::class, 'purchaseReport'
 Route::get('allOrderindex', [VueOrderController::class, 'allOrderindex']);
 Route::get('order/data', [VueOrderController::class, 'index']);
 Route::post('order/processOrder', [VueOrderController::class, 'process']);
+Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
 
 // Order Detail
 Route::apiResource('orderDetail', OrderDetailController::class);
+
+
+// Purchase
+Route::get('allPurchaseindex', [PurchaseController::class, 'allPurchaseindex']);
+Route::get('purchase/data', [PurchaseController::class, 'index']);
+Route::post('purchase/processOrder', [PurchaseController::class, 'process']);
+// Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
 
 // Purchase Detail
 Route::apiResource('purchaseDetail', PurchaseDetailController::class);
 
 
-Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
-
-// Purchase
-Route::get('allPurchaseindex', [PurchaseController::class, 'allPurchaseindex']);
-
 // Stocks
 Route::get('/stocks', [StockController::class, 'apiIndex']);
+
+// Dashboard
+Route::get('/dashboardData', [VueDashboardController::class, 'getDashboardData']);
 
 
 
