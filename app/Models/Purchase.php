@@ -14,9 +14,14 @@ class Purchase extends Model{
         return $this->belongsTo(Supplier::class);
     }
 
-    public function products() {
-        return $this->belongsTo(Product::class);
+    public function products(){
+        return  $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function purchase_details() {
+        return $this->hasMany(PurchasesDetail::class, 'purchases_id');
+    }
+
 
     public function payment_status() {
         return $this->belongsTo(PaymentStatuse::class, 'status_id');

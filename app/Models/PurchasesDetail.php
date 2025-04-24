@@ -12,10 +12,11 @@ class PurchasesDetail extends Model{
     protected $table="purchases_details";
     protected $fillable =['purchases_id', 'product_id', 'qty', 'price', 'discount', 'uom_id', 'discount'];
 
-    public function products(){
+    public function product(){
         return  $this->belongsTo(Product::class, 'product_id');
     }
-    public function product(){
+
+    public function products(){
         return  $this->belongsTo(Product::class, 'product_id');
     }
 

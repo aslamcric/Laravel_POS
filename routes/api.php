@@ -86,7 +86,7 @@ Route::apiResource('orderDetail', OrderDetailController::class);
 Route::get('allPurchaseindex', [PurchaseController::class, 'allPurchaseindex']);
 Route::get('purchase/data', [PurchaseController::class, 'index']);
 Route::post('purchase/processOrder', [PurchaseController::class, 'process']);
-// Route::get('vueorder/show/{id}', [VueOrderController::class, 'show']);
+Route::get('vuePurchase/show/{id}', [PurchaseController::class, 'show']);
 
 // Purchase Detail
 Route::apiResource('purchaseDetail', PurchaseDetailController::class);

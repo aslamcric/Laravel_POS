@@ -94,16 +94,17 @@ class PurchaseController extends Controller
         }
     }
 
-    // public function show($id)
-    // {
-    //     try {
-    //         $purchase = Purchase::with(['purchases_details', 'supplier', 'purchases_details.products'])->where("id", $id)->get();
+    public function show($id)
+    {
+        try {
+            $purchase = Purchase::with(['purchase_details', 'supplier', 'purchase_details.products'])->where("id", $id)->get();
 
-    //         return response()->json([
-    //             'purchase' => $purchase,
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         return response()->json(["error" => $th->getMessage()]);
-    //     }
-    // }
+            return response()->json([
+                'purchase' => $purchase,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()]);
+        }
+    }
+
 }
